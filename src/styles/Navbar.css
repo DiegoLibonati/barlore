@@ -94,6 +94,12 @@
   transition: transform 1s;
 }
 
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 @media only screen and (min-width: 1024px) {
   .header_container {
     justify-content: space-between;

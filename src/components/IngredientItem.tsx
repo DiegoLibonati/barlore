@@ -1,7 +1,9 @@
+interface IngredientItemProps {
+  ingredient: string;
+}
+
 export const IngredientItem = ({
   ingredient,
-}: {
-  ingredient: string;
-}): JSX.Element => {
+}: IngredientItemProps): JSX.Element => {
   return <li>{ingredient}</li>;
 };

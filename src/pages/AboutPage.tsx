@@ -1,6 +1,6 @@
-import "../styles/About.css";
+import "../styles/AboutPage.css";
 
-export const About = (): JSX.Element => {
+export const AboutPage = (): JSX.Element => {
   return (
     <main className="main_container">
       <section className="about_container">

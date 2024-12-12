@@ -1,23 +1,27 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { About } from "./pages/About";
-import { Home } from "./pages/Home";
-import { CocktailDetail } from "./pages/CocktailDetail";
-import { Error } from "./pages/Error";
+
 import { Navbar } from "./components/Navbar";
+
+import { AboutPage } from "./pages/AboutPage";
+import { HomePage } from "./pages/HomePage";
+import { CocktailDetailPage } from "./pages/CocktailDetailPage";
+import { ErrorPage } from "./pages/ErrorPage";
+
 import "./General.css";
 
 function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Navbar></Navbar>
+
       <Routes>
-        <Route path="/" element={<Home></Home>}></Route>
-        <Route path="/about" element={<About></About>}></Route>
+        <Route path="/" element={<HomePage></HomePage>}></Route>
+        <Route path="/about" element={<AboutPage></AboutPage>}></Route>
         <Route
           path="/cocktail/:id"
-          element={<CocktailDetail></CocktailDetail>}
+          element={<CocktailDetailPage></CocktailDetailPage>}
         ></Route>
-        <Route path="*" element={<Error></Error>}></Route>
+        <Route path="*" element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
     </BrowserRouter>
   );

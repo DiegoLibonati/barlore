@@ -1,19 +1,27 @@
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
-import { useGlobalContext } from "../context/context";
+
+import { useAppContext } from "../context/AppContext";
+
 import "../styles/Navbar.css";
 
 export const Navbar = (): JSX.Element => {
-  const { mobileNavbar, manageNavbar } = useGlobalContext();
+  const { mobileNavbar, manageNavbar } = useAppContext();
 
   return (
     <header className="header_container">
       <div className="header_container_logo">
         <h2>TheCocktailDB</h2>
-        <FaBars
-          className={mobileNavbar ? "bars rotate-bars" : "bars"}
+        <button
+          type="button"
           onClick={manageNavbar}
-        ></FaBars>
+          className="button"
+          aria-label="manage navbar menu"
+        >
+          <FaBars
+            className={mobileNavbar ? "bars rotate-bars" : "bars"}
+          ></FaBars>
+        </button>
       </div>
 
       <nav
@@ -30,6 +38,7 @@ export const Navbar = (): JSX.Element => {
                 isActive ? "navlink active" : "navlink"
               }
               to="/"
+              aria-label="go to home page"
             >
               Home
             </NavLink>
@@ -41,6 +50,7 @@ export const Navbar = (): JSX.Element => {
                 isActive ? "navlink active" : "navlink"
               }
               to="/about"
+              aria-label="go to about page"
             >
               About
             </NavLink>

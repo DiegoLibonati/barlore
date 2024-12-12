@@ -1,22 +1,36 @@
-import { useGlobalContext } from "../context/context";
-import { useFetch } from "../hooks/useFetch";
+import { useState } from "react";
+
+import { CockTail } from "../entities/entities";
+
 import { CocktailItem } from "../components/CocktailItem";
 import { Loading } from "../components/Loading";
-import { useRef } from "react";
+
+import { useFetch } from "../hooks/useFetch";
+import { useAppContext } from "../context/AppContext";
+
 import "../styles/Search.css";
 import "../styles/CocktailList.css";
 
-export const Home = (): JSX.Element => {
-  const { inputSearch, setInputSearch } = useGlobalContext();
+export const HomePage = (): JSX.Element => {
+  const [url, setUrl] = useState<string>("/api/json/v1/1/search.php?f=a");
 
-  const { loading, items } = useFetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${inputSearch}`
-  );
+  const { inputSearch, setInputSearch } = useAppContext();
 
-  const cocktailList = useRef<HTMLElement | null>(null);
+  const { loading, items } = useFetch<CockTail>(url, "drinks");
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
+    const value = inputSearch.trim();
+
+    if (!value) return setUrl(`/api/json/v1/1/search.php?f=a`);
+
+    setUrl(`/api/json/v1/1/search.php?s=${value}`);
+  };
+
+  const handleChangeInputSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setInputSearch(value);
   };
 
   return (
@@ -26,12 +40,13 @@ export const Home = (): JSX.Element => {
           className="search_container_form"
           onSubmit={(e) => handleSubmit(e)}
         >
-          <label>Search your favorite cocktail: </label>
+          <label htmlFor="input-search">Search your favorite cocktail: </label>
           <input
+            id="input-search"
             type="text"
             placeholder="Cocktail name"
             value={inputSearch}
-            onChange={(e) => setInputSearch(e.target.value)}
+            onChange={handleChangeInputSearch}
           ></input>
         </form>
       </section>
@@ -43,7 +58,7 @@ export const Home = (): JSX.Element => {
           There is not exists a cocktail with the name of {inputSearch}
         </h2>
       ) : (
-        <section ref={cocktailList} className="cocktail_list">
+        <section className="cocktail_list">
           {items.map((item) => {
             return (
               <CocktailItem key={item.idDrink} cocktail={item}></CocktailItem>

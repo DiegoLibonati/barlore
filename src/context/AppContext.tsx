@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { AppContextT } from "../entities/entities";
+
+import { AppContext as AppContextT } from "../entities/entities";
 
 export const AppContext = React.createContext<AppContextT | null>(null);
 
@@ -20,6 +21,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export const useGlobalContext = (): AppContextT => {
+export const useAppContext = (): AppContextT => {
   return useContext(AppContext)!;
 };

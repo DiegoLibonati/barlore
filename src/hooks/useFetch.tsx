@@ -1,26 +1,30 @@
 import { useEffect, useState } from "react";
-import { CockTail, UseFetch } from "../entities/entities";
 
-export const useFetch = (url: string): UseFetch => {
+type UseFetch<T> = {
+  loading: boolean;
+  items: T[];
+};
+
+export const useFetch = <T,>(url: string, itemsKey: string): UseFetch<T> => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [items, setItems] = useState<CockTail[]>([]);
+  const [items, setItems] = useState<T[]>([]);
 
-  const getApiInformation = async (): Promise<void> => {
-    setLoading(true);
+  const getItems = async (): Promise<void> => {
     const request = await fetch(url);
     const data = await request.json();
 
-    const drinks = data.drinks as CockTail[];
+    const dataItems = data[itemsKey] as T[];
 
-    if (drinks?.length > 0) {
-      setItems(drinks);
-    }
-
+    setItems(dataItems);
     setLoading(false);
   };
 
   useEffect(() => {
-    getApiInformation();
+    setLoading(true);
+
+    if (!url) return setLoading(false);
+
+    getItems();
   }, [url]);
 
   return {

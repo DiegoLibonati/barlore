@@ -39,10 +39,10 @@ export const CocktailDetailPage = (): JSX.Element => {
 
   return (
     <main className="main_container">
-      <section className="cocktail_detail_container">
+      <section className="detail__wrapper">
         <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}></img>
 
-        <article className="cocktail_detail_container_information">
+        <article className="detail__information">
           <h2>
             <span>Name:</span> {cocktail.strDrink}
           </h2>
@@ -52,7 +52,7 @@ export const CocktailDetailPage = (): JSX.Element => {
           <p>
             <span>Information:</span> {cocktail.strAlcoholic}
           </p>
-          <ul className="cocktail_detail_container_information_list">
+          <ul className="ingredients">
             <p>
               <span>Ingredients:</span>{" "}
             </p>
@@ -65,7 +65,7 @@ export const CocktailDetailPage = (): JSX.Element => {
           </ul>
         </article>
 
-        <Link className="GoHome" to="/" aria-label="go to home">
+        <Link className="go__home" to="/" aria-label="go to home">
           Go Home
         </Link>
       </section>

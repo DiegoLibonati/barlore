@@ -1,11 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Saira:wght@100&display=swap");
 
+:root {
+  --primary-font: "Saira", Helvetica, sans-serif;
+  --base-font-size: 10px;
+  --primary-color: #726da8;
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --black-int-color: 0, 0, 0;
+}
+
 * {
-  margin: 0;
   padding: 0;
+  margin: 0;
+  font-size: var(--base-font-size);
+  font-family: var(--primary-font);
   box-sizing: border-box;
-  font-size: 10px;
-  font-family: Saira, Helvetica, sans-serif;
+  list-style: none;
 }
 
 img {

@@ -1,4 +1,4 @@
-.error_container {
+.error__wrapper {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -7,29 +7,29 @@
   height: 50rem;
 }
 
-.error_container h1 {
+.error__wrapper h1 {
   font-size: 5rem;
   text-align: center;
 }
 
-.error_container a {
-  background-color: #726da8;
+.error__wrapper a {
+  background-color: var(--primary-color);
   padding: 1rem;
   font-size: 2rem;
-  color: #fff;
+  color: var(--white-color);
   text-decoration: none;
   cursor: pointer;
   transition: background-color 1s, outline 1s, color 1s;
 }
 
-.error_container a:hover {
-  background-color: #fff;
-  outline: 0.2rem solid #726da8;
-  color: #726da8;
+.error__wrapper a:hover {
+  background-color: var(--white-color);
+  outline: 0.2rem solid var(--primary-color);
+  color: var(--primary-color);
   transition: background-color 1s, outline 1s, color 1s;
 }
 
-.error_container img {
+.error__wrapper img {
   height: 25rem;
   width: 25rem;
   object-fit: cover;

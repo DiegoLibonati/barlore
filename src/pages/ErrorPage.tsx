@@ -5,7 +5,7 @@ import "../styles/ErrorPage.css";
 export const ErrorPage = (): JSX.Element => {
   return (
     <main className="main_container">
-      <section className="error_container">
+      <section className="error__wrapper">
         <h1>Page not found</h1>
         <Link to="/" aria-label="go to home">
           Go Home

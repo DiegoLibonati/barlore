@@ -1,4 +1,4 @@
-.cocktail_container_load {
+.cocktail__loader {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7,41 +7,41 @@
   pad: 1rem;
 }
 
-.loader_root {
+.loader__root {
   display: inline-block;
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 8rem;
+  height: 8rem;
 }
-.loader_root div {
+.loader__root div {
   display: inline-block;
   position: absolute;
-  left: 8px;
-  width: 16px;
-  background: #726da8;
+  left: .8rem;
+  width: 1.6rem;
+  background: var(--primary-color);
   animation: loaderAnimation 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
-.loader_root div:nth-child(1) {
-  left: 8px;
+.loader__root div:nth-child(1) {
+  left: .8rem;
   animation-delay: -0.24s;
 }
-.loader_root div:nth-child(2) {
-  left: 32px;
+.loader__root div:nth-child(2) {
+  left: 3.2rem;
   animation-delay: -0.12s;
 }
-.loader_root div:nth-child(3) {
-  left: 56px;
+.loader__root div:nth-child(3) {
+  left: 5.6rem;
   animation-delay: 0;
 }
 
 @keyframes loaderAnimation {
   0% {
-    top: 8px;
-    height: 64px;
+    top: .8rem;
+    height: 6.4rem;
   }
   50%,
   100% {
-    top: 24px;
-    height: 32px;
+    top: 2.4rem;
+    height: 3.2rem;
   }
 }

@@ -35,9 +35,9 @@ export const HomePage = (): JSX.Element => {
 
   return (
     <main className="main_container">
-      <section className="search_container">
+      <section className="search__wrapper">
         <form
-          className="search_container_form"
+          className="search__form"
           onSubmit={(e) => handleSubmit(e)}
         >
           <label htmlFor="input-search">Search your favorite cocktail: </label>
@@ -54,11 +54,11 @@ export const HomePage = (): JSX.Element => {
       {loading ? (
         <Loading></Loading>
       ) : items.length === 0 ? (
-        <h2 className="h2_notext">
+        <h2 className="cocktails__not-found">
           There is not exists a cocktail with the name of {inputSearch}
         </h2>
       ) : (
-        <section className="cocktail_list">
+        <section className="cocktails">
           {items.map((item) => {
             return (
               <CocktailItem key={item.idDrink} cocktail={item}></CocktailItem>

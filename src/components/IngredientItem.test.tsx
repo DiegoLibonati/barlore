@@ -24,10 +24,14 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It should render the list item with the ingredient name entered by props.", () => {
-  renderComponent();
+describe("IngredientItem.tsx", () => {
+  describe("General Tests.", () => {
+    test("It should render the list item with the ingredient name entered by props.", () => {
+      renderComponent();
 
-  const ingredient = screen.getByRole("listitem");
+      const ingredient = screen.getByRole("listitem");
 
-  expect(ingredient).toBeInTheDocument();
+      expect(ingredient).toBeInTheDocument();
+    });
+  });
 });

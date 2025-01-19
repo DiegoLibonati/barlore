@@ -9,8 +9,8 @@ export const Navbar = (): JSX.Element => {
   const { mobileNavbar, manageNavbar } = useAppContext();
 
   return (
-    <header className="header_container">
-      <div className="header_container_logo">
+    <header className="header__wrapper">
+      <div className="header__logo">
         <h2>TheCocktailDB</h2>
         <button
           type="button"
@@ -19,7 +19,7 @@ export const Navbar = (): JSX.Element => {
           aria-label="manage navbar menu"
         >
           <FaBars
-            className={mobileNavbar ? "bars rotate-bars" : "bars"}
+            className={mobileNavbar ? "bars rotate__bars" : "bars"}
           ></FaBars>
         </button>
       </div>
@@ -27,15 +27,15 @@ export const Navbar = (): JSX.Element => {
       <nav
         className={
           mobileNavbar
-            ? "header_container_nav nav-open"
-            : "header_container_nav"
+            ? "header__nav header__nav--open"
+            : "header__nav"
         }
       >
-        <ul className="header_container_nav_list">
+        <ul className="header__list">
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "navlink active" : "navlink"
+                isActive ? "header__list-item active" : "header__list-item"
               }
               to="/"
               aria-label="go to home page"
@@ -47,7 +47,7 @@ export const Navbar = (): JSX.Element => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? "navlink active" : "navlink"
+                isActive ? "header__list-item active" : "header__list-item"
               }
               to="/about"
               aria-label="go to about page"

@@ -7,8 +7,6 @@ import { HomePage } from "./pages/HomePage";
 import { CocktailDetailPage } from "./pages/CocktailDetailPage";
 import { ErrorPage } from "./pages/ErrorPage";
 
-import "./General.css";
-
 function App(): JSX.Element {
   return (
     <BrowserRouter>

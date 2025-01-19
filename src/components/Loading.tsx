@@ -2,8 +2,8 @@ import "../styles/Loading.css";
 
 export const Loading = (): JSX.Element => {
   return (
-    <section className="cocktail_container_load">
-      <div className="loader_root">
+    <section className="cocktail__loader">
+      <div className="loader__root">
         <div></div>
         <div></div>
         <div></div>

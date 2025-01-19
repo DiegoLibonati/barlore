@@ -27,53 +27,59 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the title of the APP.", () => {
-  renderComponent();
+describe("Navbar.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the title of the APP.", () => {
+      renderComponent();
 
-  const headingApp = screen.getByRole("heading", { name: /TheCocktailDB/i });
+      const headingApp = screen.getByRole("heading", {
+        name: /TheCocktailDB/i,
+      });
 
-  expect(headingApp).toBeInTheDocument();
-});
+      expect(headingApp).toBeInTheDocument();
+    });
 
-test("It must render the button to handle the navbar state. You must open and close the navbar.", async () => {
-  renderComponent();
+    test("It must render the button to handle the navbar state. You must open and close the navbar.", async () => {
+      renderComponent();
 
-  const nav = screen.getByRole("navigation");
-  const btnManageNav = screen.getByRole("button", {
-    name: /manage navbar menu/i,
+      const nav = screen.getByRole("navigation");
+      const btnManageNav = screen.getByRole("button", {
+        name: /manage navbar menu/i,
+      });
+      // eslint-disable-next-line
+      const faBars = btnManageNav.children[0] as HTMLElement;
+
+      expect(nav).toBeInTheDocument();
+      expect(nav).not.toHaveClass("header__nav--open");
+      expect(btnManageNav).toBeInTheDocument();
+      expect(faBars).toBeInTheDocument();
+      expect(faBars).not.toHaveClass("rotate__bars");
+
+      await user.click(btnManageNav);
+
+      expect(nav).toHaveClass("header__nav--open");
+      expect(faBars).toHaveClass("rotate__bars");
+
+      await user.click(btnManageNav);
+
+      expect(nav).not.toHaveClass("header__nav--open");
+      expect(faBars).not.toHaveClass("rotate__bars");
+    });
+
+    test("It must render the navbar, the list of links and the home and about links.", () => {
+      renderComponent();
+
+      const nav = screen.getByRole("navigation");
+      const navList = screen.getByRole("list");
+      const linkHome = screen.getByRole("link", { name: /go to home page/i });
+      const linkAbout = screen.getByRole("link", { name: /go to about page/i });
+
+      expect(nav).toBeInTheDocument();
+      expect(navList).toBeInTheDocument();
+      // eslint-disable-next-line
+      expect(navList.children).toHaveLength(2);
+      expect(linkHome).toBeInTheDocument();
+      expect(linkAbout).toBeInTheDocument();
+    });
   });
-  // eslint-disable-next-line
-  const faBars = btnManageNav.children[0] as HTMLElement;
-
-  expect(nav).toBeInTheDocument();
-  expect(nav).not.toHaveClass("nav-open");
-  expect(btnManageNav).toBeInTheDocument();
-  expect(faBars).toBeInTheDocument();
-  expect(faBars).not.toHaveClass("rotate-bars");
-
-  await user.click(btnManageNav);
-
-  expect(nav).toHaveClass("nav-open");
-  expect(faBars).toHaveClass("rotate-bars");
-
-  await user.click(btnManageNav);
-
-  expect(nav).not.toHaveClass("nav-open");
-  expect(faBars).not.toHaveClass("rotate-bars");
-});
-
-test("It must render the navbar, the list of links and the home and about links.", () => {
-  renderComponent();
-
-  const nav = screen.getByRole("navigation");
-  const navList = screen.getByRole("list");
-  const linkHome = screen.getByRole("link", { name: /go to home page/i });
-  const linkAbout = screen.getByRole("link", { name: /go to about page/i });
-
-  expect(nav).toBeInTheDocument();
-  expect(navList).toBeInTheDocument();
-  // eslint-disable-next-line
-  expect(navList.children).toHaveLength(2);
-  expect(linkHome).toBeInTheDocument();
-  expect(linkAbout).toBeInTheDocument();
 });

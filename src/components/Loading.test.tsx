@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import { Loading } from "./Loading";
 
@@ -14,18 +14,24 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the loader.", () => {
-  const { container } = renderComponent();
+describe("Loading.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the loader.", () => {
+      const { container } = renderComponent();
 
-  // eslint-disable-next-line
-  const containerRoot = container.querySelector(
-    ".cocktail_container_load"
-  ) as HTMLElement;
-  // eslint-disable-next-line
-  const loaderRoot = container.querySelector(".loader_root") as HTMLDivElement;
+      // eslint-disable-next-line
+      const containerRoot = container.querySelector(
+        ".cocktail__loader"
+      ) as HTMLElement;
+      // eslint-disable-next-line
+      const loaderRoot = container.querySelector(
+        ".loader__root"
+      ) as HTMLDivElement;
 
-  expect(containerRoot).toBeInTheDocument();
-  expect(loaderRoot).toBeInTheDocument();
-  // eslint-disable-next-line
-  expect(loaderRoot?.children).toHaveLength(3);
+      expect(containerRoot).toBeInTheDocument();
+      expect(loaderRoot).toBeInTheDocument();
+      // eslint-disable-next-line
+      expect(loaderRoot?.children).toHaveLength(3);
+    });
+  });
 });

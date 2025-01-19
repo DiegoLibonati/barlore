@@ -10,9 +10,9 @@ interface CockTailItemProps {
 
 export const CocktailItem = ({ cocktail }: CockTailItemProps): JSX.Element => {
   return (
-    <article className="cocktail_container">
+    <article className="cocktail">
       <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}></img>
-      <div className="cocktail_container_information">
+      <div className="cocktail__information">
         <h2>{cocktail.strDrink}</h2>
         <p>{cocktail.strGlass}</p>
         <p>{cocktail.strAlcoholic}</p>

@@ -9,7 +9,7 @@ import { ErrorPage } from "../pages/ErrorPage";
 
 import { useFetch } from "../hooks/useFetch";
 
-import "../styles/CocktailDetail.css";
+import "./CocktailDetailPage.css";
 
 export const CocktailDetailPage = (): JSX.Element => {
   const { id } = useParams();
@@ -38,23 +38,30 @@ export const CocktailDetailPage = (): JSX.Element => {
   if (!loading && items.length === 0) return <ErrorPage></ErrorPage>;
 
   return (
-    <main className="main_container">
-      <section className="detail__wrapper">
-        <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}></img>
+    <main className="main-cocktail-detail-page">
+      <section className="cocktail-detail">
+        <img
+          src={cocktail.strDrinkThumb}
+          alt={cocktail.strDrink}
+          className="cocktail-detail__img"
+        ></img>
 
-        <article className="detail__information">
-          <h2>
-            <span>Name:</span> {cocktail.strDrink}
+        <article className="cocktail-detail__information">
+          <h2 className="cocktail-detail__name">
+            <span className="cocktail-detail__label">Name:</span>{" "}
+            {cocktail.strDrink}
           </h2>
-          <p>
-            <span>Glass:</span> {cocktail.strGlass}
+          <p className="cocktail-detail__glass-name">
+            <span className="cocktail-detail__label">Glass:</span>{" "}
+            {cocktail.strGlass}
           </p>
-          <p>
-            <span>Information:</span> {cocktail.strAlcoholic}
+          <p className="cocktail-detail__alcoholic">
+            <span className="cocktail-detail__label">Information:</span>{" "}
+            {cocktail.strAlcoholic}
           </p>
-          <ul className="ingredients">
-            <p>
-              <span>Ingredients:</span>{" "}
+          <ul className="cocktail-detail__list-ingredients">
+            <p className="cocktail-detail__ingredients">
+              <span className="cocktail-detail__label">Ingredients:</span>{" "}
             </p>
             {ingredients.map((ingredient, index) => (
               <IngredientItem
@@ -65,7 +72,11 @@ export const CocktailDetailPage = (): JSX.Element => {
           </ul>
         </article>
 
-        <Link className="go__home" to="/" aria-label="go to home">
+        <Link
+          className="cocktail-detail__link-go-home"
+          to="/"
+          aria-label="go to home"
+        >
           Go Home
         </Link>
       </section>

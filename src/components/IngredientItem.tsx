@@ -1,3 +1,5 @@
+import "./IngredientItem.css";
+
 interface IngredientItemProps {
   ingredient: string;
 }
@@ -5,5 +7,5 @@ interface IngredientItemProps {
 export const IngredientItem = ({
   ingredient,
 }: IngredientItemProps): JSX.Element => {
-  return <li>{ingredient}</li>;
+  return <li className="ingredient-item">{ingredient}</li>;
 };

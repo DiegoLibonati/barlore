@@ -50,20 +50,30 @@ describe("Navbar.tsx", () => {
       const faBars = btnManageNav.children[0] as HTMLElement;
 
       expect(nav).toBeInTheDocument();
-      expect(nav).not.toHaveClass("header__nav--open");
+      expect(nav).not.toHaveClass(
+        "header-wrapper__nav header-wrapper__nav--open"
+      );
       expect(btnManageNav).toBeInTheDocument();
       expect(faBars).toBeInTheDocument();
-      expect(faBars).not.toHaveClass("rotate__bars");
+      expect(faBars).not.toHaveClass(
+        "header-wrapper__btn-manage-icon header-wrapper__btn-manage-icon--rotate-bars"
+      );
 
       await user.click(btnManageNav);
 
-      expect(nav).toHaveClass("header__nav--open");
-      expect(faBars).toHaveClass("rotate__bars");
+      expect(nav).toHaveClass("header-wrapper__nav header-wrapper__nav--open");
+      expect(faBars).toHaveClass(
+        "header-wrapper__btn-manage-icon header-wrapper__btn-manage-icon--rotate-bars"
+      );
 
       await user.click(btnManageNav);
 
-      expect(nav).not.toHaveClass("header__nav--open");
-      expect(faBars).not.toHaveClass("rotate__bars");
+      expect(nav).not.toHaveClass(
+        "header-wrapper__nav header-wrapper__nav--open"
+      );
+      expect(faBars).not.toHaveClass(
+        "header-wrapper__btn-manage-icon header-wrapper__btn-manage-icon--rotate-bars"
+      );
     });
 
     test("It must render the navbar, the list of links and the home and about links.", () => {

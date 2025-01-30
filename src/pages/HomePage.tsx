@@ -8,8 +8,7 @@ import { Loading } from "../components/Loading";
 import { useFetch } from "../hooks/useFetch";
 import { useAppContext } from "../context/AppContext";
 
-import "../styles/Search.css";
-import "../styles/CocktailList.css";
+import "./HomePage.css";
 
 export const HomePage = (): JSX.Element => {
   const [url, setUrl] = useState<string>("/api/json/v1/1/search.php?f=a");
@@ -34,17 +33,17 @@ export const HomePage = (): JSX.Element => {
   };
 
   return (
-    <main className="main_container">
-      <section className="search__wrapper">
-        <form
-          className="search__form"
-          onSubmit={(e) => handleSubmit(e)}
-        >
-          <label htmlFor="input-search">Search your favorite cocktail: </label>
+    <main className="main-home-page">
+      <section className="search">
+        <form className="search__form" onSubmit={(e) => handleSubmit(e)}>
+          <label htmlFor="input-search" className="search__form-label">
+            Search your favorite cocktail:{" "}
+          </label>
           <input
             id="input-search"
             type="text"
             placeholder="Cocktail name"
+            className="search__form-input"
             value={inputSearch}
             onChange={handleChangeInputSearch}
           ></input>
@@ -54,7 +53,7 @@ export const HomePage = (): JSX.Element => {
       {loading ? (
         <Loading></Loading>
       ) : items.length === 0 ? (
-        <h2 className="cocktails__not-found">
+        <h2 className="cocktails-not-found">
           There is not exists a cocktail with the name of {inputSearch}
         </h2>
       ) : (

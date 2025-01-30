@@ -26,7 +26,7 @@ describe("AboutPage.tsx", () => {
       );
 
       expect(mainContainer).toBeInTheDocument();
-      expect(mainContainer).toHaveClass("main_container");
+      expect(mainContainer).toHaveClass("main-about-page");
       expect(headingPage).toBeInTheDocument();
       expect(description).toBeInTheDocument();
     });

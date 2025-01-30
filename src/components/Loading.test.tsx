@@ -21,11 +21,11 @@ describe("Loading.tsx", () => {
 
       // eslint-disable-next-line
       const containerRoot = container.querySelector(
-        ".cocktail__loader"
+        ".cocktail-loader"
       ) as HTMLElement;
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loader__root"
+        ".cocktail-loader__root"
       ) as HTMLDivElement;
 
       expect(containerRoot).toBeInTheDocument();

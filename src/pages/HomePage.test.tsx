@@ -84,7 +84,7 @@ describe("HomePage.tsx", () => {
 
       // eslint-disable-next-line
       const loaderRoot = container.querySelector(
-        ".loader__root"
+        ".cocktail-loader__root"
       ) as HTMLDivElement;
 
       expect(loaderRoot).toBeInTheDocument();

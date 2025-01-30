@@ -1,4 +1,14 @@
-.detail__wrapper {
+.main-cocktail-detail-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 1rem;
+}
+
+.cocktail-detail {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,13 +18,13 @@
   margin-top: 1rem;
 }
 
-.detail__wrapper img {
+.cocktail-detail__img {
   width: 100%;
   height: 30rem;
   object-fit: cover;
 }
 
-.detail__information {
+.cocktail-detail__information {
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -25,19 +35,26 @@
   padding: 1rem;
 }
 
-.detail__information h2 {
+.cocktail-detail__name {
   font-size: 1.5rem;
   color: var(--white-color);
   font-weight: 500;
 }
 
-.detail__information p {
+.cocktail-detail__glass-name,
+.cocktail-detail__alcoholic,
+.cocktail-detail__ingredients {
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--white-color);
 }
 
-.ingredients {
+.cocktail-detail__label {
+  font-size: 2rem;
+  border-bottom: 0.2rem solid var(--white-color);
+}
+
+.cocktail-detail__list-ingredients {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -47,19 +64,7 @@
   height: auto;
 }
 
-.detail__information span {
-  font-size: 2rem;
-  border-bottom: 0.2rem solid var(--white-color);
-}
-
-.ingredients li {
-  font-size: 1.5rem;
-  padding-left: 1rem;
-  font-weight: 500;
-  color: var(--white-color);
-}
-
-.go__home {
+.cocktail-detail__link-go-home {
   padding: 0.5rem;
   background-color: var(--primary-color);
   color: var(--white-color);
@@ -70,7 +75,7 @@
   transition: background-color 1s, outline 1s, color 1s;
 }
 
-.go__home:hover {
+.cocktail-detail__link-go-home:hover {
   background-color: var(--white-color);
   outline: 0.2rem solid var(--primary-color);
   color: var(--primary-color);
@@ -78,7 +83,7 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .detail__wrapper {
+  .cocktail-detail {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: calc(100vh - 7rem);
@@ -86,12 +91,12 @@
     margin: 0;
   }
 
-  .detail__wrapper img {
+  .cocktail-detail__img {
     height: 60rem;
     align-self: flex-end;
   }
 
-  .detail__information {
+  .cocktail-detail__information {
     justify-content: space-evenly;
     height: 25rem;
     width: 50rem;
@@ -99,7 +104,7 @@
     align-self: flex-end;
   }
 
-  .go__home {
+  .cocktail-detail__link-go-home {
     text-align: center;
     align-self: center;
     justify-self: center;

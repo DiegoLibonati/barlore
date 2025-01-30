@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import { CockTail } from "../entities/entities";
 
-import "../styles/CocktailItem.css";
+import "./CocktailItem.css";
 
 interface CockTailItemProps {
   cocktail: CockTail;
@@ -11,14 +11,19 @@ interface CockTailItemProps {
 export const CocktailItem = ({ cocktail }: CockTailItemProps): JSX.Element => {
   return (
     <article className="cocktail">
-      <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink}></img>
+      <img
+        src={cocktail.strDrinkThumb}
+        alt={cocktail.strDrink}
+        className="cocktail__img"
+      ></img>
       <div className="cocktail__information">
-        <h2>{cocktail.strDrink}</h2>
-        <p>{cocktail.strGlass}</p>
-        <p>{cocktail.strAlcoholic}</p>
+        <h2 className="cocktail__name">{cocktail.strDrink}</h2>
+        <p className="cocktail__glass-name">{cocktail.strGlass}</p>
+        <p className="cocktail__alcoholic">{cocktail.strAlcoholic}</p>
         <Link
           to={`/cocktail/${cocktail.idDrink}`}
           aria-label="details cocktail"
+          className="cocktail__details"
         >
           Details
         </Link>

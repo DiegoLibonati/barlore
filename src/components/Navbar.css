@@ -1,4 +1,4 @@
-.header__wrapper {
+.header-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,7 @@
   top: 0;
 }
 
-.header__logo {
+.header-wrapper__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,23 +22,29 @@
   padding: 1rem;
 }
 
-.header__logo h2 {
+.header-wrapper__title {
   font-size: 2rem;
   color: var(--white-color);
 }
 
-.bars {
+.header-wrapper__btn-manage {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-wrapper__btn-manage-icon {
   font-size: 2rem;
   color: var(--white-color);
   transition: transform 1s;
 }
 
-.rotate__bars {
+.header-wrapper__btn-manage-icon--rotate-bars {
   transform: rotate(-90deg);
   transition: transform 1s;
 }
 
-.header__nav {
+.header-wrapper__nav {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,12 +56,12 @@
   transition: max-height 0.5s;
 }
 
-.header__nav--open {
+.header-wrapper__nav--open {
   max-height: 100rem;
   transition: max-height 1s;
 }
 
-.header__list {
+.header-wrapper__list {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -66,18 +72,18 @@
   list-style: none;
 }
 
-.header__list li {
+.header-wrapper__list-item {
   margin: 1rem 0 1rem 0;
   position: relative;
 }
 
-.header__list-item {
+.header-wrapper__nav-link {
   font-size: 1.5rem;
   color: var(--white-color);
   text-decoration: none;
 }
 
-.header__list-item::after {
+.header-wrapper__nav-link::after {
   content: "";
   position: absolute;
   width: 100%;
@@ -89,45 +95,40 @@
   transition: transform 1s;
 }
 
-.active::after {
+.header-wrapper__nav-link--active::after {
   transform: scale(1, 1);
   transition: transform 1s;
 }
 
-.button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
 @media only screen and (min-width: 1024px) {
-  .header__wrapper {
+  .header-wrapper {
     justify-content: space-between;
   }
 
-  .header__logo {
+  .header-wrapper__content {
     justify-content: center;
     width: 25rem;
   }
-  .bars {
+
+  .header-wrapper__btn-manage-icon {
     display: none;
   }
 
-  .header__nav {
+  .header-wrapper__nav {
     width: 40rem;
     max-height: 100rem;
   }
 
-  .header__list {
+  .header-wrapper__list {
     flex-flow: row wrap;
     height: 7rem;
   }
 
-  .header__list li {
+  .header-wrapper__list-item {
     margin: 0;
   }
 
-  .header__list li a {
+  .header-wrapper__nav-link {
     font-size: 2rem;
   }
 }

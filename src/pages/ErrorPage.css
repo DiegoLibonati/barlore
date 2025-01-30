@@ -1,4 +1,14 @@
-.error__wrapper {
+.main-error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column wrap;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 1rem;
+}
+
+.error {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -7,12 +17,12 @@
   height: 50rem;
 }
 
-.error__wrapper h1 {
+.error__title {
   font-size: 5rem;
   text-align: center;
 }
 
-.error__wrapper a {
+.error__link-go-home {
   background-color: var(--primary-color);
   padding: 1rem;
   font-size: 2rem;
@@ -22,14 +32,14 @@
   transition: background-color 1s, outline 1s, color 1s;
 }
 
-.error__wrapper a:hover {
+.error__link-go-home:hover {
   background-color: var(--white-color);
   outline: 0.2rem solid var(--primary-color);
   color: var(--primary-color);
   transition: background-color 1s, outline 1s, color 1s;
 }
 
-.error__wrapper img {
+.error__img {
   height: 25rem;
   width: 25rem;
   object-fit: cover;

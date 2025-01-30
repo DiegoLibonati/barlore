@@ -34,7 +34,7 @@ describe("ErrorPage.tsx", () => {
       const img = screen.getByRole("img");
 
       expect(mainContainer).toBeInTheDocument();
-      expect(mainContainer).toHaveClass("main_container");
+      expect(mainContainer).toHaveClass("main-error-page");
       expect(headingPage).toBeInTheDocument();
       expect(linkHome).toBeInTheDocument();
       expect(img).toBeInTheDocument();

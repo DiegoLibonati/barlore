@@ -9,7 +9,7 @@
     rgba(var(--black-color), 0.08) 0 0 0 0.1rem;
 }
 
-.cocktail img {
+.cocktail__img {
   width: 100%;
   height: 30rem;
   object-fit: cover;
@@ -26,19 +26,20 @@
   background-color: var(--primary-color);
 }
 
-.cocktail__information h2 {
+.cocktail__name {
   font-size: 3rem;
   font-weight: 900;
   color: var(--white-color);
 }
 
-.cocktail__information p {
+.cocktail__glass-name,
+.cocktail__alcoholic {
   font-weight: 600;
   color: var(--white-color);
   font-size: 2rem;
 }
 
-.cocktail__information a {
+.cocktail__details {
   padding: 0.5rem;
   background-color: var(--white-color);
   color: var(--primary-color);
@@ -50,7 +51,7 @@
   transition: background-color 1s, outline 1s, color 1s;
 }
 
-.cocktail__information a:hover {
+.cocktail__details:hover {
   background-color: var(--primary-color);
   outline: 0.2rem solid var(--white-color);
   color: var(--white-color);

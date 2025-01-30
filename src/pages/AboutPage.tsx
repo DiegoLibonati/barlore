@@ -1,11 +1,11 @@
-import "../styles/AboutPage.css";
+import "./AboutPage.css";
 
 export const AboutPage = (): JSX.Element => {
   return (
-    <main className="main_container">
-      <section className="about__wrapper">
-        <h1>About us</h1>
-        <p>
+    <main className="main-about-page">
+      <section className="about">
+        <h1 className="about__title">About us</h1>
+        <p className="about__description">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
           repudiandae architecto qui adipisci in officiis, aperiam sequi atque
           perferendis eos, autem maiores nisi saepe quisquam hic odio

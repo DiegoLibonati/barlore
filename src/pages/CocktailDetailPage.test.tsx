@@ -6,8 +6,8 @@ import { CocktailDetailPage } from "./CocktailDetailPage";
 
 import { AppProvider } from "../context/AppContext";
 
-import { createServer } from "../tests/msw/server";
-import { mockRequestSearchI } from "../tests/jest.constants";
+import { createServer } from "../../tests/msw/server";
+import { mockRequestSearchI } from "../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

@@ -6,7 +6,7 @@ import { CockTail } from "../entities/entities";
 
 import { CocktailItem } from "./CocktailItem";
 
-import { mockCocktail } from "../tests/jest.constants";
+import { mockCocktail } from "../../tests/jest.constants";
 
 type RenderComponent = {
   props: {

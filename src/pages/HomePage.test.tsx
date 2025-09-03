@@ -7,11 +7,11 @@ import { HomePage } from "./HomePage";
 
 import { AppProvider } from "../context/AppContext";
 
-import { createServer } from "../tests/msw/server";
+import { createServer } from "../../tests/msw/server";
 import {
   mockRequestSearchF,
   mockRequestSearchS,
-} from "../tests/jest.constants";
+} from "../../tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

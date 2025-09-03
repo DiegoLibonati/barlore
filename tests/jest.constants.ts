@@ -1,4 +1,4 @@
-import { CockTail } from "../entities/entities";
+import { CockTail } from "../src/entities/entities";
 
 export const mockCocktail: CockTail = {
   idDrink: "17222",

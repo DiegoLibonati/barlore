@@ -32,7 +32,6 @@ I made a web application that allows you to see different types of drinks. If we
 "react-dom": "^18.2.0"
 "react-icons": "^4.4.0"
 "react-router-dom": "^6.3.0"
-"react-scripts": "5.0.1"
 "web-vitals": "^2.1.4"
 ```
 
@@ -45,14 +44,17 @@ I made a web application that allows you to see different types of drinks. If we
 "@testing-library/user-event": "^14.5.2"
 "@types/jest": "^29.5.13"
 "@types/node": "^20.10.6"
-"@types/react": "^18.2.46"
-"@types/react-dom": "^18.2.18"
+"@types/react": "^18.3.11"
+"@types/react-dom": "^18.3.1"
+"@vitejs/plugin-react": "^5.0.2"
 "jest": "^29.7.0"
 "jest-environment-jsdom": "^29.7.0"
 "jest-fixed-jsdom": "^0.0.9"
 "msw": "^2.6.0"
 "ts-jest": "^29.2.5"
+"ts-node": "^10.9.2"
 "typescript": "^4.9.5"
+"vite": "^7.1.5"
 ```
 
 ## Portfolio Link

@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 
-import { AboutPage } from "./AboutPage";
+import { AboutPage } from "@src/pages/AboutPage";
 
 type RenderComponent = {
   container: HTMLElement;

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import { Loading } from "./Loading";
+import { Loading } from "@src/components/Loading";
 
 type RenderComponent = {
   container: HTMLElement;

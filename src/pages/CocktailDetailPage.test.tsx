@@ -2,12 +2,12 @@ import { screen, render } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 
-import { CocktailDetailPage } from "./CocktailDetailPage";
+import { CocktailDetailPage } from "@src/pages/CocktailDetailPage";
 
-import { AppProvider } from "../context/AppContext";
+import { AppProvider } from "@src/context/AppContext";
 
-import { createServer } from "../../tests/msw/server";
-import { mockRequestSearchI } from "../../tests/jest.constants";
+import { createServer } from "@tests/msw/server";
+import { mockRequestSearchI } from "@tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

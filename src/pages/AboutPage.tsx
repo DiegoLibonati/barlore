@@ -1,4 +1,4 @@
-import "./AboutPage.css";
+import "@src/pages/AboutPage.css";
 
 export const AboutPage = (): JSX.Element => {
   return (

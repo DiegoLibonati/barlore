@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Navbar } from "./components/Navbar";
+import { Navbar } from "@src/components/Navbar";
 
-import { AboutPage } from "./pages/AboutPage";
-import { HomePage } from "./pages/HomePage";
-import { CocktailDetailPage } from "./pages/CocktailDetailPage";
-import { ErrorPage } from "./pages/ErrorPage";
+import { AboutPage } from "@src/pages/AboutPage";
+import { HomePage } from "@src/pages/HomePage";
+import { CocktailDetailPage } from "@src/pages/CocktailDetailPage";
+import { ErrorPage } from "@src/pages/ErrorPage";
 
 function App(): JSX.Element {
   return (

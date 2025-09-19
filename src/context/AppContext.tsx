@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 
-import { AppContext as AppContextT } from "../entities/entities";
+import { AppContext as AppContextT } from "@src/entities/entities";
 
 export const AppContext = React.createContext<AppContextT | null>(null);
 

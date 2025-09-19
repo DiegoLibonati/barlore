@@ -3,15 +3,15 @@ import user from "@testing-library/user-event";
 
 import { MemoryRouter } from "react-router-dom";
 
-import { HomePage } from "./HomePage";
+import { HomePage } from "@src/pages/HomePage";
 
-import { AppProvider } from "../context/AppContext";
+import { AppProvider } from "@src/context/AppContext";
 
-import { createServer } from "../../tests/msw/server";
+import { createServer } from "@tests/msw/server";
 import {
   mockRequestSearchF,
   mockRequestSearchS,
-} from "../../tests/jest.constants";
+} from "@tests/jest.constants";
 
 type RenderComponent = {
   container: HTMLElement;

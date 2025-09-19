@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { CockTail } from "../entities/entities";
+import { CockTail } from "@src/entities/entities";
 
-import "./CocktailItem.css";
+import "@src/components/CocktailItem.css";
 
 interface CockTailItemProps {
   cocktail: CockTail;

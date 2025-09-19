@@ -3,9 +3,9 @@ import user from "@testing-library/user-event";
 
 import { MemoryRouter } from "react-router-dom";
 
-import { Navbar } from "./Navbar";
+import { Navbar } from "@src/components/Navbar";
 
-import { AppProvider } from "../context/AppContext";
+import { AppProvider } from "@src/context/AppContext";
 
 type RenderComponent = {
   container: HTMLElement;

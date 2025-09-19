@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "@src/context/AppContext";
 
-import "./Navbar.css";
+import "@src/components/Navbar.css";
 
 export const Navbar = (): JSX.Element => {
   const { mobileNavbar, manageNavbar } = useAppContext();

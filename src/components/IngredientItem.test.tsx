@@ -1,6 +1,6 @@
 import { screen, render } from "@testing-library/react";
 
-import { IngredientItem } from "./IngredientItem";
+import { IngredientItem } from "@src/components/IngredientItem";
 
 type RenderComponent = {
   props: {

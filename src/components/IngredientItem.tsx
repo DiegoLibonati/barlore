@@ -1,4 +1,4 @@
-import "./IngredientItem.css";
+import "@src/components/IngredientItem.css";
 
 interface IngredientItemProps {
   ingredient: string;

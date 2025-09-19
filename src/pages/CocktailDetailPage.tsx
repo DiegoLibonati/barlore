@@ -1,15 +1,15 @@
 import { useParams, Link } from "react-router-dom";
 
-import { CockTail } from "../entities/entities";
+import { CockTail } from "@src/entities/entities";
 
-import { Loading } from "../components/Loading";
-import { IngredientItem } from "../components/IngredientItem";
+import { Loading } from "@src/components/Loading";
+import { IngredientItem } from "@src/components/IngredientItem";
 
-import { ErrorPage } from "../pages/ErrorPage";
+import { ErrorPage } from "@src/pages/ErrorPage";
 
-import { useFetch } from "../hooks/useFetch";
+import { useFetch } from "@src/hooks/useFetch";
 
-import "./CocktailDetailPage.css";
+import "@src/pages/CocktailDetailPage.css";
 
 export const CocktailDetailPage = (): JSX.Element => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ export const CocktailDetailPage = (): JSX.Element => {
       </main>
     );
 
-  if (!loading && items.length === 0) return <ErrorPage></ErrorPage>;
+  if (!loading && items?.length === 0) return <ErrorPage></ErrorPage>;
 
   return (
     <main className="main-cocktail-detail-page">

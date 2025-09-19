@@ -2,11 +2,11 @@ import { screen, render } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 
-import { CockTail } from "../entities/entities";
+import { CockTail } from "@src/entities/entities";
 
-import { CocktailItem } from "./CocktailItem";
+import { CocktailItem } from "@src/components/CocktailItem";
 
-import { mockCocktail } from "../../tests/jest.constants";
+import { mockCocktail } from "@tests/jest.constants";
 
 type RenderComponent = {
   props: {

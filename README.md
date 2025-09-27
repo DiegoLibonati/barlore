@@ -22,6 +22,7 @@ I made a web application that allows you to see different types of drinks. If we
 1. React JS
 2. Typescript
 3. CSS3
+4. Vite
 
 ## Libraries used
 

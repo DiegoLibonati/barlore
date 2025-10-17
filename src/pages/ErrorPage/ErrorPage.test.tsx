@@ -2,7 +2,7 @@ import { screen, render } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 
-import { ErrorPage } from "@src/pages/ErrorPage";
+import { ErrorPage } from "@src/pages/ErrorPage/ErrorPage";
 
 type RenderComponent = {
   container: HTMLElement;

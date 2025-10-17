@@ -1,32 +1,50 @@
-import { useParams, Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { CockTail } from "@src/entities/entities";
+import { Cocktail } from "@src/entities/app";
 
-import { Loading } from "@src/components/Loading";
-import { IngredientItem } from "@src/components/IngredientItem";
+import { Loading } from "@src/components/Loading/Loading";
+import { IngredientItem } from "@src/components/IngredientItem/IngredientItem";
 
-import { ErrorPage } from "@src/pages/ErrorPage";
+import { getCocktailById } from "@src/api/get/getCocktailById";
 
-import { useFetch } from "@src/hooks/useFetch";
-
-import "@src/pages/CocktailDetailPage.css";
+import "@src/pages/CocktailDetailPage/CocktailDetailPage.css";
 
 export const CocktailDetailPage = (): JSX.Element => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [cocktail, setCocktail] = useState<Cocktail | null>(null);
+
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const { loading, items } = useFetch<CockTail>(
-    `/api/json/v1/1/lookup.php?i=${id}`,
-    "drinks"
-  );
+  const ingredients = useMemo(() => {
+    if (!cocktail) return [];
 
-  const cocktail = items[0];
-  const ingredients = [
-    cocktail?.strIngredient1,
-    cocktail?.strIngredient2,
-    cocktail?.strIngredient3,
-    cocktail?.strIngredient4,
-    cocktail?.strIngredient5,
-  ];
+    return [
+      cocktail?.strIngredient1,
+      cocktail?.strIngredient2,
+      cocktail?.strIngredient3,
+      cocktail?.strIngredient4,
+      cocktail?.strIngredient5,
+    ];
+  }, [cocktail]);
+
+  const handleGetCocktail = async () => {
+    setLoading(true);
+
+    if (!id) return navigate("/error");
+
+    const cocktail = await getCocktailById(id!);
+
+    if (!cocktail) return navigate("/error");
+
+    setCocktail(cocktail);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    handleGetCocktail();
+  }, []);
 
   if (loading)
     return (
@@ -35,29 +53,27 @@ export const CocktailDetailPage = (): JSX.Element => {
       </main>
     );
 
-  if (!loading && items?.length === 0) return <ErrorPage></ErrorPage>;
-
   return (
     <main className="main-cocktail-detail-page">
       <section className="cocktail-detail">
         <img
-          src={cocktail.strDrinkThumb}
-          alt={cocktail.strDrink}
+          src={cocktail?.strDrinkThumb}
+          alt={cocktail?.strDrink}
           className="cocktail-detail__img"
         ></img>
 
         <article className="cocktail-detail__information">
           <h2 className="cocktail-detail__name">
             <span className="cocktail-detail__label">Name:</span>{" "}
-            {cocktail.strDrink}
+            {cocktail?.strDrink}
           </h2>
           <p className="cocktail-detail__glass-name">
             <span className="cocktail-detail__label">Glass:</span>{" "}
-            {cocktail.strGlass}
+            {cocktail?.strGlass}
           </p>
           <p className="cocktail-detail__alcoholic">
             <span className="cocktail-detail__label">Information:</span>{" "}
-            {cocktail.strAlcoholic}
+            {cocktail?.strAlcoholic}
           </p>
           <ul className="cocktail-detail__list-ingredients">
             <p className="cocktail-detail__ingredients">

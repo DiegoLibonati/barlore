@@ -1,12 +1,17 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
-import { useAppContext } from "@src/context/AppContext";
-
-import "@src/components/Navbar.css";
+import "@src/components/Navbar/Navbar.css";
 
 export const Navbar = (): JSX.Element => {
-  const { mobileNavbar, manageNavbar } = useAppContext();
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleManageNavbar = () => {
+    setOpen((state) => {
+      return !state;
+    });
+  };
 
   return (
     <header className="header-wrapper">
@@ -14,13 +19,13 @@ export const Navbar = (): JSX.Element => {
         <h2 className="header-wrapper__title">TheCocktailDB</h2>
         <button
           type="button"
-          onClick={manageNavbar}
+          onClick={handleManageNavbar}
           className="header-wrapper__btn-manage"
           aria-label="manage navbar menu"
         >
           <FaBars
             className={
-              mobileNavbar
+              open
                 ? "header-wrapper__btn-manage-icon header-wrapper__btn-manage-icon--rotate-bars"
                 : "header-wrapper__btn-manage-icon"
             }
@@ -30,7 +35,7 @@ export const Navbar = (): JSX.Element => {
 
       <nav
         className={
-          mobileNavbar
+          open
             ? "header-wrapper__nav header-wrapper__nav--open"
             : "header-wrapper__nav"
         }

@@ -1,4 +1,4 @@
-import "@src/components/Loading.css";
+import "@src/components/Loading/Loading.css";
 
 export const Loading = (): JSX.Element => {
   return (

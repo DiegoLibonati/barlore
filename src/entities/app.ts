@@ -1,13 +1,4 @@
-// Types
-
-export type AppContext = {
-  mobileNavbar: boolean;
-  inputSearch: string;
-  manageNavbar: () => void;
-  setInputSearch: React.Dispatch<React.SetStateAction<string>>;
-};
-
-export type CockTail = {
+export type Cocktail = {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate?: string;
@@ -60,5 +51,3 @@ export type CockTail = {
   strCreativeCommonsConfirmed: string;
   dateModified: string;
 };
-
-// Interfaces

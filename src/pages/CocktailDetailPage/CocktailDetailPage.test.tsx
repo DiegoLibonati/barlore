@@ -1,10 +1,7 @@
 import { screen, render } from "@testing-library/react";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
 
-import { MemoryRouter } from "react-router-dom";
-
-import { CocktailDetailPage } from "@src/pages/CocktailDetailPage";
-
-import { AppProvider } from "@src/context/AppContext";
+import { CocktailDetailPage } from "@src/pages/CocktailDetailPage/CocktailDetailPage";
 
 import { createServer } from "@tests/msw/server";
 import { mockRequestSearchI } from "@tests/jest.constants";
@@ -14,13 +11,16 @@ type RenderComponent = {
 };
 
 const renderComponent = (): RenderComponent => {
+  const cocktailId = mockRequestSearchI.drinks[0].idDrink;
+
   const { container } = render(
     <MemoryRouter
+      initialEntries={[`/cocktail/${cocktailId}`]}
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
-      <AppProvider>
-        <CocktailDetailPage></CocktailDetailPage>
-      </AppProvider>
+      <Routes>
+        <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
+      </Routes>
     </MemoryRouter>
   );
 
@@ -30,13 +30,16 @@ const renderComponent = (): RenderComponent => {
 };
 
 const asyncRenderComponent = async (): Promise<RenderComponent> => {
+  const cocktailId = mockRequestSearchI.drinks[0].idDrink;
+
   const { container } = render(
     <MemoryRouter
+      initialEntries={[`/cocktail/${cocktailId}`]}
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
-      <AppProvider>
-        <CocktailDetailPage></CocktailDetailPage>
-      </AppProvider>
+      <Routes>
+        <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
+      </Routes>
     </MemoryRouter>
   );
 
@@ -57,7 +60,7 @@ describe("CocktailDetailPage.tsx", () => {
           const url = new URL(request.url);
           const i = url.searchParams.get("i");
 
-          console.log(i);
+          console.log("Requested cocktail ID:", i);
 
           return mockRequestSearchI;
         },
@@ -67,7 +70,6 @@ describe("CocktailDetailPage.tsx", () => {
     test("It must render the loader when the drink is loading.", () => {
       const { container } = renderComponent();
 
-      // eslint-disable-next-line
       const loaderRoot = container.querySelector(
         ".cocktail-loader__root"
       ) as HTMLDivElement;

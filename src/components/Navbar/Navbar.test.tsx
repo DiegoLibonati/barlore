@@ -3,9 +3,7 @@ import user from "@testing-library/user-event";
 
 import { MemoryRouter } from "react-router-dom";
 
-import { Navbar } from "@src/components/Navbar";
-
-import { AppProvider } from "@src/context/AppContext";
+import { Navbar } from "@src/components/Navbar/Navbar";
 
 type RenderComponent = {
   container: HTMLElement;
@@ -16,9 +14,7 @@ const renderComponent = (): RenderComponent => {
     <MemoryRouter
       future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
     >
-      <AppProvider>
-        <Navbar></Navbar>
-      </AppProvider>
+      <Navbar></Navbar>
     </MemoryRouter>
   );
 
@@ -46,7 +42,6 @@ describe("Navbar.tsx", () => {
       const btnManageNav = screen.getByRole("button", {
         name: /manage navbar menu/i,
       });
-      // eslint-disable-next-line
       const faBars = btnManageNav.children[0] as HTMLElement;
 
       expect(nav).toBeInTheDocument();
@@ -86,7 +81,6 @@ describe("Navbar.tsx", () => {
 
       expect(nav).toBeInTheDocument();
       expect(navList).toBeInTheDocument();
-      // eslint-disable-next-line
       expect(navList.children).toHaveLength(2);
       expect(linkHome).toBeInTheDocument();
       expect(linkAbout).toBeInTheDocument();

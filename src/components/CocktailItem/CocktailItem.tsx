@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 
-import { CockTail } from "@src/entities/entities";
+import { CockTailItemProps } from "@src/entities/props";
 
-import "@src/components/CocktailItem.css";
-
-interface CockTailItemProps {
-  cocktail: CockTail;
-}
+import "@src/components/CocktailItem/CocktailItem.css";
 
 export const CocktailItem = ({ cocktail }: CockTailItemProps): JSX.Element => {
   return (

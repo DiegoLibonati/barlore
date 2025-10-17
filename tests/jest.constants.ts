@@ -1,6 +1,6 @@
-import { CockTail } from "@src/entities/entities";
+import { Cocktail } from "@src/entities/app";
 
-export const mockCocktail: CockTail = {
+export const mockCocktail: Cocktail = {
   idDrink: "17222",
   strDrink: "A1",
   strCategory: "Cocktail",
@@ -30,7 +30,7 @@ export const mockCocktail: CockTail = {
   dateModified: "2017-09-07 21:42:09",
 };
 
-export const mockCocktailTwo: CockTail = {
+export const mockCocktailTwo: Cocktail = {
   idDrink: "13501",
   strDrink: "ABC",
   strCategory: "Shot",
@@ -53,7 +53,7 @@ export const mockCocktailTwo: CockTail = {
   dateModified: "2016-08-31 19:32:08",
 };
 
-export const mockCocktailThree: CockTail = {
+export const mockCocktailThree: Cocktail = {
   idDrink: "11023",
   strDrink: "Almeria",
   strCategory: "Ordinary Drink",
@@ -81,8 +81,8 @@ export const mockCocktailThree: CockTail = {
   dateModified: "2017-01-02 20:16:21",
 };
 
-export const mockCocktails: CockTail[] = [mockCocktail, mockCocktailTwo];
-export const mockCocktailsTwo: CockTail[] = [mockCocktailThree];
+export const mockCocktails: Cocktail[] = [mockCocktail, mockCocktailTwo];
+export const mockCocktailsTwo: Cocktail[] = [mockCocktailThree];
 
 export const mockRequestSearchF = { drinks: mockCocktails };
 export const mockRequestSearchS = { drinks: mockCocktailsTwo };

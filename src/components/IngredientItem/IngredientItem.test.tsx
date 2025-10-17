@@ -1,11 +1,11 @@
 import { screen, render } from "@testing-library/react";
 
-import { IngredientItem } from "@src/components/IngredientItem";
+import { IngredientItemProps } from "@src/entities/props";
+
+import { IngredientItem } from "@src/components/IngredientItem/IngredientItem";
 
 type RenderComponent = {
-  props: {
-    ingredient: string;
-  };
+  props: IngredientItemProps;
   container: HTMLElement;
 };
 

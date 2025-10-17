@@ -1,8 +1,6 @@
-import "@src/components/IngredientItem.css";
+import { IngredientItemProps } from "@src/entities/props";
 
-interface IngredientItemProps {
-  ingredient: string;
-}
+import "@src/components/IngredientItem/IngredientItem.css";
 
 export const IngredientItem = ({
   ingredient,

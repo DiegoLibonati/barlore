@@ -19,12 +19,11 @@ describe("Loading.tsx", () => {
     test("It must render the loader.", () => {
       const { container } = renderComponent();
 
-      const containerRoot = container.querySelector(
-        ".cocktail-loader"
-      ) as HTMLElement;
-      const loaderRoot = container.querySelector(
+      const containerRoot =
+        container.querySelector<HTMLElement>(".cocktail-loader");
+      const loaderRoot = container.querySelector<HTMLDivElement>(
         ".cocktail-loader__root"
-      ) as HTMLDivElement;
+      );
 
       expect(containerRoot).toBeInTheDocument();
       expect(loaderRoot).toBeInTheDocument();

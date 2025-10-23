@@ -74,17 +74,13 @@ describe("HomePage.tsx", () => {
     });
 
     test("It must render the loader when the drinks have not yet been loaded.", async () => {
-      const { container } = renderComponent();
+      renderComponent();
 
       const input = screen.getByPlaceholderText("Cocktail name");
       const user = userEvent.setup();
 
       await user.type(input, "margarita");
       await user.keyboard("{Enter}");
-
-      const loaderRoot = container.querySelector(
-        ".cocktail-loader__root"
-      ) as HTMLDivElement;
 
       await waitFor(() => {
         const images = screen.queryAllByRole("img");
@@ -93,7 +89,7 @@ describe("HomePage.tsx", () => {
     });
 
     test("It must render all drinks when first loaded", async () => {
-      const { container } = renderComponent();
+      renderComponent();
 
       const input = screen.getByPlaceholderText("Cocktail name");
       const user = userEvent.setup();
@@ -111,7 +107,7 @@ describe("HomePage.tsx", () => {
     });
 
     test("It should render the drinks obtained when a search is performed.", async () => {
-      const { container } = renderComponent();
+      renderComponent();
 
       const input = screen.getByPlaceholderText("Cocktail name");
       const user = userEvent.setup();

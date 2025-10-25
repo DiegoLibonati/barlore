@@ -1,6 +1,8 @@
-import { Cocktail } from "@src/entities/app";
+import { GetCocktailsResponse } from "@src/entities/responses";
 
-export const getCocktails = async (search: string): Promise<Cocktail[]> => {
+export const getCocktails = async (
+  search: string
+): Promise<GetCocktailsResponse> => {
   try {
     const response = await fetch(`/api/json/v1/1/search.php?f=${search}`, {
       method: "GET",
@@ -10,12 +12,9 @@ export const getCocktails = async (search: string): Promise<Cocktail[]> => {
       throw new Error("Error fetching cocktails.");
     }
 
-    const data = await response.json();
-    
+    const data: GetCocktailsResponse = await response.json();
 
-    if (typeof data["drinks"] === "string") return [];
-
-    return data["drinks"] || [];
+    return data;
   } catch (e) {
     throw new Error(`Error fetching cocktails: ${e}.`);
   }

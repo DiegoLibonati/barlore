@@ -29,9 +29,10 @@ export const HomePage = (): JSX.Element => {
 
   const handleGetCocktails = async (search: string) => {
     setLoading(true);
-    const cocktails = await getCocktails(search);
+    const response = await getCocktails(search);
+    const drinks = response["drinks"];
 
-    setCocktails(cocktails);
+    setCocktails(typeof drinks === "string" ? [] : drinks);
     setLoading(false);
   };
 

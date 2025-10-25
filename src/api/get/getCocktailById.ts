@@ -1,6 +1,8 @@
-import { Cocktail } from "@src/entities/app";
+import { GetCocktailByIdResponse } from "@src/entities/responses";
 
-export const getCocktailById = async (id: string): Promise<Cocktail | null> => {
+export const getCocktailById = async (
+  id: string
+): Promise<GetCocktailByIdResponse> => {
   try {
     const response = await fetch(`/api/json/v1/1/lookup.php?i=${id}`, {
       method: "GET",
@@ -10,13 +12,9 @@ export const getCocktailById = async (id: string): Promise<Cocktail | null> => {
       throw new Error("Error fetching cocktail by id.");
     }
 
-    const data = await response.json();
+    const data: GetCocktailByIdResponse = await response.json();
 
-    if (!data["drinks"] || data["drinks"].length === 0) {
-      return null;
-    }
-
-    return data["drinks"][0];
+    return data;
   } catch (e) {
     throw new Error(`Error fetching cocktail by id: ${e}.`);
   }

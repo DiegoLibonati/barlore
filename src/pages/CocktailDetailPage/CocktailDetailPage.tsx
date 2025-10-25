@@ -34,11 +34,12 @@ export const CocktailDetailPage = (): JSX.Element => {
 
     if (!id) return navigate("/error");
 
-    const cocktail = await getCocktailById(id!);
+    const response = await getCocktailById(id!);
+    const cocktails = response.drinks;
 
-    if (!cocktail) return navigate("/error");
+    if (!cocktails || typeof cocktails === "string") return navigate("/error");
 
-    setCocktail(cocktail);
+    setCocktail(cocktails[0]);
     setLoading(false);
   };
 

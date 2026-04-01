@@ -41,7 +41,7 @@ const HomePage = () => {
 
   return (
     <main className="main-home-page">
-      <section className="search">
+      <section className="search" aria-label="Cocktail search">
         <form className="search__form" onSubmit={(e) => handleSubmit(e)}>
           <label htmlFor="input-search" className="search__form-label">
             Search your favorite cocktail:{" "}
@@ -64,7 +64,7 @@ const HomePage = () => {
           There is not exists a cocktail with the name of {searchInputValue}
         </h2>
       ) : (
-        <section className="cocktails">
+        <section className="cocktails" aria-label="Cocktail results">
           {cocktails?.map((item) => {
             return (
               <CocktailItem

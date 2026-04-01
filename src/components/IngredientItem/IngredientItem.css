@@ -1,6 +1,6 @@
 .ingredient-item {
-  font-size: 1.5rem;
-  padding-left: 1rem;
+  font-size: 0.9375rem;
+  padding-left: 0.625rem;
   font-weight: 500;
   color: var(--color-white);
 }

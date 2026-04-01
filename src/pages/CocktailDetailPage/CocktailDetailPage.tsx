@@ -72,7 +72,7 @@ const CocktailDetailPage = () => {
           <p className="cocktail-detail__alcoholic">
             <span className="cocktail-detail__label">Information:</span> {cocktail?.strAlcoholic}
           </p>
-          <ul className="cocktail-detail__list-ingredients">
+          <ul className="cocktail-detail__list-ingredients" aria-label="Ingredients">
             <p className="cocktail-detail__ingredients">
               <span className="cocktail-detail__label">Ingredients:</span>{" "}
             </p>
@@ -82,7 +82,7 @@ const CocktailDetailPage = () => {
           </ul>
         </article>
 
-        <Link className="cocktail-detail__link-go-home" to="/" aria-label="go to home">
+        <Link className="cocktail-detail__link-go-home" to="/" aria-label="Go back to home page">
           Go Home
         </Link>
       </section>

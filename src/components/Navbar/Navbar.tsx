@@ -21,7 +21,9 @@ const Navbar = () => {
           type="button"
           onClick={handleManageNavbar}
           className="header-wrapper__btn-manage"
-          aria-label="manage navbar menu"
+          aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={open}
+          aria-controls="main-navigation"
         >
           <FaBars
             className={
@@ -29,11 +31,14 @@ const Navbar = () => {
                 ? "header-wrapper__btn-manage-icon header-wrapper__btn-manage-icon--rotate-bars"
                 : "header-wrapper__btn-manage-icon"
             }
+            aria-hidden="true"
           ></FaBars>
         </button>
       </div>
 
       <nav
+        id="main-navigation"
+        aria-label="Main navigation"
         className={open ? "header-wrapper__nav header-wrapper__nav--open" : "header-wrapper__nav"}
       >
         <ul className="header-wrapper__list">
@@ -45,7 +50,7 @@ const Navbar = () => {
                   : "header-wrapper__nav-link"
               }
               to="/"
-              aria-label="go to home page"
+              aria-label="Home page"
             >
               Home
             </NavLink>
@@ -59,7 +64,7 @@ const Navbar = () => {
                   : "header-wrapper__nav-link"
               }
               to="/about"
-              aria-label="go to about page"
+              aria-label="About page"
             >
               About
             </NavLink>

@@ -20,7 +20,7 @@ const CocktailItem = ({
         <p className="cocktail__alcoholic">{strAlcoholic}</p>
         <Link
           to={`/cocktail/${idDrink}`}
-          aria-label="details cocktail"
+          aria-label={`View details for ${strDrink}`}
           className="cocktail__details"
         >
           Details

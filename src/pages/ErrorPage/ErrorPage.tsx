@@ -7,7 +7,7 @@ const ErrorPage = () => {
     <main className="main-error-page">
       <section className="error">
         <h1 className="error__title">Page not found</h1>
-        <Link to="/" aria-label="go to home" className="error__link-go-home">
+        <Link to="/" aria-label="Go back to home page" className="error__link-go-home">
           Go Home
         </Link>
         <img

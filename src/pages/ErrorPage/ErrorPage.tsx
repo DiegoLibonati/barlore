@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import "@src/pages/ErrorPage/ErrorPage.css";
+import "@/pages/ErrorPage/ErrorPage.css";
 
-export const ErrorPage = (): JSX.Element => {
+const ErrorPage = () => {
   return (
     <main className="main-error-page">
       <section className="error">
@@ -19,3 +19,5 @@ export const ErrorPage = (): JSX.Element => {
     </main>
   );
 };
+
+export default ErrorPage;

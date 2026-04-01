@@ -1,16 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { Cocktail } from "@src/entities/app";
+import { Cocktail } from "@/types/app";
 
-import { Loading } from "@src/components/Loading/Loading";
-import { IngredientItem } from "@src/components/IngredientItem/IngredientItem";
+import Loading from "@/components/Loading/Loading";
+import IngredientItem from "@/components/IngredientItem/IngredientItem";
 
-import { getCocktailById } from "@src/api/get/getCocktailById";
+import { cocktailsService } from "@/services/cocktailsService";
 
-import "@src/pages/CocktailDetailPage/CocktailDetailPage.css";
+import "@/pages/CocktailDetailPage/CocktailDetailPage.css";
 
-export const CocktailDetailPage = (): JSX.Element => {
+const CocktailDetailPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [cocktail, setCocktail] = useState<Cocktail | null>(null);
 
@@ -34,12 +34,11 @@ export const CocktailDetailPage = (): JSX.Element => {
 
     if (!id) return navigate("/error");
 
-    const response = await getCocktailById(id!);
-    const cocktails = response.drinks;
+    const response = await cocktailsService.getById(id);
 
-    if (!cocktails || typeof cocktails === "string") return navigate("/error");
+    if (!response || typeof response === "string") return navigate("/error");
 
-    setCocktail(cocktails[0]);
+    setCocktail(response);
     setLoading(false);
   };
 
@@ -65,38 +64,30 @@ export const CocktailDetailPage = (): JSX.Element => {
 
         <article className="cocktail-detail__information">
           <h2 className="cocktail-detail__name">
-            <span className="cocktail-detail__label">Name:</span>{" "}
-            {cocktail?.strDrink}
+            <span className="cocktail-detail__label">Name:</span> {cocktail?.strDrink}
           </h2>
           <p className="cocktail-detail__glass-name">
-            <span className="cocktail-detail__label">Glass:</span>{" "}
-            {cocktail?.strGlass}
+            <span className="cocktail-detail__label">Glass:</span> {cocktail?.strGlass}
           </p>
           <p className="cocktail-detail__alcoholic">
-            <span className="cocktail-detail__label">Information:</span>{" "}
-            {cocktail?.strAlcoholic}
+            <span className="cocktail-detail__label">Information:</span> {cocktail?.strAlcoholic}
           </p>
           <ul className="cocktail-detail__list-ingredients">
             <p className="cocktail-detail__ingredients">
               <span className="cocktail-detail__label">Ingredients:</span>{" "}
             </p>
             {ingredients.map((ingredient, index) => (
-              <IngredientItem
-                key={`ingredient-${index}`}
-                ingredient={ingredient!}
-              ></IngredientItem>
+              <IngredientItem key={`ingredient-${index}`} ingredient={ingredient!}></IngredientItem>
             ))}
           </ul>
         </article>
 
-        <Link
-          className="cocktail-detail__link-go-home"
-          to="/"
-          aria-label="go to home"
-        >
+        <Link className="cocktail-detail__link-go-home" to="/" aria-label="go to home">
           Go Home
         </Link>
       </section>
     </main>
   );
 };
+
+export default CocktailDetailPage;

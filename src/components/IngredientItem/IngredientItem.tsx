@@ -1,9 +1,9 @@
-import { IngredientItemProps } from "@src/entities/props";
+import { IngredientItemProps } from "@/types/props";
 
-import "@src/components/IngredientItem/IngredientItem.css";
+import "@/components/IngredientItem/IngredientItem.css";
 
-export const IngredientItem = ({
-  ingredient,
-}: IngredientItemProps): JSX.Element => {
+const IngredientItem = ({ ingredient }: IngredientItemProps) => {
   return <li className="ingredient-item">{ingredient}</li>;
 };
+
+export default IngredientItem;

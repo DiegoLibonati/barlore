@@ -31,13 +31,13 @@
   flex-flow: column wrap;
   width: 100%;
   margin-top: 1rem;
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
   padding: 1rem;
 }
 
 .cocktail-detail__name {
   font-size: 1.5rem;
-  color: var(--white-color);
+  color: var(--color-white);
   font-weight: 500;
 }
 
@@ -46,12 +46,12 @@
 .cocktail-detail__ingredients {
   font-size: 1.5rem;
   font-weight: 500;
-  color: var(--white-color);
+  color: var(--color-white);
 }
 
 .cocktail-detail__label {
   font-size: 2rem;
-  border-bottom: 0.2rem solid var(--white-color);
+  border-bottom: 0.2rem solid var(--color-white);
 }
 
 .cocktail-detail__list-ingredients {
@@ -66,20 +66,26 @@
 
 .cocktail-detail__link-go-home {
   padding: 0.5rem;
-  background-color: var(--primary-color);
-  color: var(--white-color);
+  background-color: var(--color-primary);
+  color: var(--color-white);
   font-size: 2rem;
   text-decoration: none;
   margin-top: 1rem;
   cursor: pointer;
-  transition: background-color 1s, outline 1s, color 1s;
+  transition:
+    background-color 1s,
+    outline 1s,
+    color 1s;
 }
 
 .cocktail-detail__link-go-home:hover {
-  background-color: var(--white-color);
-  outline: 0.2rem solid var(--primary-color);
-  color: var(--primary-color);
-  transition: background-color 1s, outline 1s, color 1s;
+  background-color: var(--color-white);
+  outline: 0.2rem solid var(--color-primary);
+  color: var(--color-primary);
+  transition:
+    background-color 1s,
+    outline 1s,
+    color 1s;
 }
 
 @media only screen and (min-width: 1024px) {

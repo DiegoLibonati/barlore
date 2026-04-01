@@ -1,6 +1,6 @@
-import "@src/components/Loading/Loading.css";
+import "@/components/Loading/Loading.css";
 
-export const Loading = (): JSX.Element => {
+const Loading = () => {
   return (
     <section className="cocktail-loader">
       <div className="cocktail-loader__root">
@@ -11,3 +11,5 @@ export const Loading = (): JSX.Element => {
     </section>
   );
 };
+
+export default Loading;

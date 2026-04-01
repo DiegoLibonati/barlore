@@ -6,6 +6,7 @@
   width: 100%;
   height: 100%;
   padding-bottom: 1rem;
+  padding-top: 7rem;
 }
 
 .error {
@@ -23,20 +24,26 @@
 }
 
 .error__link-go-home {
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
   padding: 1rem;
   font-size: 2rem;
-  color: var(--white-color);
+  color: var(--color-white);
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 1s, outline 1s, color 1s;
+  transition:
+    background-color 1s,
+    outline 1s,
+    color 1s;
 }
 
 .error__link-go-home:hover {
-  background-color: var(--white-color);
-  outline: 0.2rem solid var(--primary-color);
-  color: var(--primary-color);
-  transition: background-color 1s, outline 1s, color 1s;
+  background-color: var(--color-white);
+  outline: 0.2rem solid var(--color-primary);
+  color: var(--color-primary);
+  transition:
+    background-color 1s,
+    outline 1s,
+    color 1s;
 }
 
 .error__img {

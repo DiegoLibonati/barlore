@@ -2,9 +2,9 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
-import "@src/components/Navbar/Navbar.css";
+import "@/components/Navbar/Navbar.css";
 
-export const Navbar = (): JSX.Element => {
+const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleManageNavbar = () => {
@@ -34,11 +34,7 @@ export const Navbar = (): JSX.Element => {
       </div>
 
       <nav
-        className={
-          open
-            ? "header-wrapper__nav header-wrapper__nav--open"
-            : "header-wrapper__nav"
-        }
+        className={open ? "header-wrapper__nav header-wrapper__nav--open" : "header-wrapper__nav"}
       >
         <ul className="header-wrapper__list">
           <li className="header-wrapper__list-item">
@@ -73,3 +69,5 @@ export const Navbar = (): JSX.Element => {
     </header>
   );
 };
+
+export default Navbar;

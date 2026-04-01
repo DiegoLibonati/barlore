@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 
-import { Cocktail } from "@src/entities/app";
+import { Cocktail } from "@/types/app";
 
-import { CocktailItem } from "@src/components/CocktailItem/CocktailItem";
-import { Loading } from "@src/components/Loading/Loading";
+import CocktailItem from "@/components/CocktailItem/CocktailItem";
+import Loading from "@/components/Loading/Loading";
 
-import { getCocktails } from "@src/api/get/getCocktails";
+import { cocktailsService } from "@/services/cocktailsService";
 
-import "@src/pages/HomePage/HomePage.css";
+import "@/pages/HomePage/HomePage.css";
 
-export const HomePage = (): JSX.Element => {
+const HomePage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [cocktails, setCocktails] = useState<Cocktail[]>([]);
   const [searchInputValue, setSearchInputValue] = useState<string>("");
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
     const value = searchInputValue.trim() ?? "a";
@@ -29,10 +29,9 @@ export const HomePage = (): JSX.Element => {
 
   const handleGetCocktails = async (search: string) => {
     setLoading(true);
-    const response = await getCocktails(search);
-    const drinks = response["drinks"];
+    const response = await cocktailsService.getAll(search);
 
-    setCocktails(typeof drinks === "string" ? [] : drinks);
+    setCocktails(typeof response === "string" ? [] : response);
     setLoading(false);
   };
 
@@ -68,7 +67,14 @@ export const HomePage = (): JSX.Element => {
         <section className="cocktails">
           {cocktails?.map((item) => {
             return (
-              <CocktailItem key={item.idDrink} cocktail={item}></CocktailItem>
+              <CocktailItem
+                key={item.idDrink}
+                idDrink={item.idDrink}
+                strAlcoholic={item.strAlcoholic}
+                strDrink={item.strDrink}
+                strDrinkThumb={item.strDrinkThumb}
+                strGlass={item.strGlass}
+              ></CocktailItem>
             );
           })}
         </section>
@@ -76,3 +82,5 @@ export const HomePage = (): JSX.Element => {
     </main>
   );
 };
+
+export default HomePage;

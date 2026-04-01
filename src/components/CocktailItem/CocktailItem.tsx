@@ -1,23 +1,25 @@
 import { Link } from "react-router-dom";
 
-import { CockTailItemProps } from "@src/entities/props";
+import { CockTailItemProps } from "@/types/props";
 
-import "@src/components/CocktailItem/CocktailItem.css";
+import "@/components/CocktailItem/CocktailItem.css";
 
-export const CocktailItem = ({ cocktail }: CockTailItemProps): JSX.Element => {
+const CocktailItem = ({
+  idDrink,
+  strAlcoholic,
+  strDrink,
+  strDrinkThumb,
+  strGlass,
+}: CockTailItemProps) => {
   return (
     <article className="cocktail">
-      <img
-        src={cocktail.strDrinkThumb}
-        alt={cocktail.strDrink}
-        className="cocktail__img"
-      ></img>
+      <img src={strDrinkThumb} alt={strDrink} className="cocktail__img"></img>
       <div className="cocktail__information">
-        <h2 className="cocktail__name">{cocktail.strDrink}</h2>
-        <p className="cocktail__glass-name">{cocktail.strGlass}</p>
-        <p className="cocktail__alcoholic">{cocktail.strAlcoholic}</p>
+        <h2 className="cocktail__name">{strDrink}</h2>
+        <p className="cocktail__glass-name">{strGlass}</p>
+        <p className="cocktail__alcoholic">{strAlcoholic}</p>
         <Link
-          to={`/cocktail/${cocktail.idDrink}`}
+          to={`/cocktail/${idDrink}`}
           aria-label="details cocktail"
           className="cocktail__details"
         >
@@ -27,3 +29,5 @@ export const CocktailItem = ({ cocktail }: CockTailItemProps): JSX.Element => {
     </article>
   );
 };
+
+export default CocktailItem;

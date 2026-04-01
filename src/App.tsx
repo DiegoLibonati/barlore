@@ -1,15 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
-import { Navbar } from "@src/components/Navbar/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
 
-import { CocktailRouter } from "@src/router/CocktailRouter";
+import { CocktailRouter } from "@/router/CocktailRouter";
 
-function App(): JSX.Element {
+function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar></Navbar>
       <CocktailRouter></CocktailRouter>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

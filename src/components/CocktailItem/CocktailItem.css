@@ -5,8 +5,9 @@
   flex-flow: column wrap;
   width: 100%;
   height: auto;
-  box-shadow: rgba(var(--black-color), 0.25) 0 0.4rem 0.8rem -0.2rem,
-    rgba(var(--black-color), 0.08) 0 0 0 0.1rem;
+  box-shadow:
+    rgba(var(--color-black), 0.25) 0 0.4rem 0.8rem -0.2rem,
+    rgba(var(--color-black), 0.08) 0 0 0 0.1rem;
 }
 
 .cocktail__img {
@@ -23,37 +24,43 @@
   padding: 0.5rem;
   width: 100%;
   height: 25rem;
-  background-color: var(--primary-color);
+  background-color: var(--color-primary);
 }
 
 .cocktail__name {
   font-size: 3rem;
   font-weight: 900;
-  color: var(--white-color);
+  color: var(--color-white);
 }
 
 .cocktail__glass-name,
 .cocktail__alcoholic {
   font-weight: 600;
-  color: var(--white-color);
+  color: var(--color-white);
   font-size: 2rem;
 }
 
 .cocktail__details {
   padding: 0.5rem;
-  background-color: var(--white-color);
-  color: var(--primary-color);
+  background-color: var(--color-white);
+  color: var(--color-primary);
   text-decoration: none;
   font-size: 2rem;
   align-self: center;
   cursor: pointer;
   font-weight: 900;
-  transition: background-color 1s, outline 1s, color 1s;
+  transition:
+    background-color 1s,
+    outline 1s,
+    color 1s;
 }
 
 .cocktail__details:hover {
-  background-color: var(--primary-color);
-  outline: 0.2rem solid var(--white-color);
-  color: var(--white-color);
-  transition: background-color 1s, outline 1s, color 1s;
+  background-color: var(--color-primary);
+  outline: 0.2rem solid var(--color-white);
+  color: var(--color-white);
+  transition:
+    background-color 1s,
+    outline 1s,
+    color 1s;
 }

@@ -24,6 +24,8 @@ describe("AboutPage", () => {
 
   it("should render the description paragraph", () => {
     const { container } = renderPage();
-    expect(container.querySelector<HTMLElement>(".about__description")).toBeInTheDocument();
+    expect(
+      container.querySelector<HTMLParagraphElement>(".about__description")
+    ).toBeInTheDocument();
   });
 });

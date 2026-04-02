@@ -24,13 +24,13 @@ describe("Loading", () => {
 
   it("should render three bar elements", () => {
     const { container } = renderComponent();
-    const bars = container.querySelectorAll<HTMLElement>(".cocktail-loader__bar");
+    const bars = container.querySelectorAll<HTMLDivElement>(".cocktail-loader__bar");
     expect(bars).toHaveLength(3);
   });
 
   it("should render the inner root with aria-hidden", () => {
     const { container } = renderComponent();
-    expect(container.querySelector<HTMLElement>(".cocktail-loader__root")).toHaveAttribute(
+    expect(container.querySelector<HTMLDivElement>(".cocktail-loader__root")).toHaveAttribute(
       "aria-hidden",
       "true"
     );

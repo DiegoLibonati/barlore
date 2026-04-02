@@ -27,24 +27,28 @@ describe("HomePage", () => {
     jest.clearAllMocks();
   });
 
-  it("should render the search section", () => {
+  it("should render the search section", async () => {
     mockedFetch.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
     } as unknown as Response);
 
     renderPage();
+
+    await screen.findByText(mockCocktails[0]!.strDrink);
 
     expect(screen.getByRole("region", { name: "Cocktail search" })).toBeInTheDocument();
   });
 
-  it("should render the search input", () => {
+  it("should render the search input", async () => {
     mockedFetch.mockResolvedValueOnce({
       ok: true,
       json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
     } as unknown as Response);
 
     renderPage();
+
+    await screen.findByText(mockCocktails[0]!.strDrink);
 
     expect(screen.getByPlaceholderText("Cocktail name")).toBeInTheDocument();
   });

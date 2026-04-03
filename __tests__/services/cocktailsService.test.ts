@@ -11,9 +11,10 @@ describe("cocktailsService", () => {
 
   describe("getAll", () => {
     it("should return cocktails on success", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
+        json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
       } as unknown as Response);
 
       const result = await cocktailsService.getAll("a");
@@ -23,9 +24,10 @@ describe("cocktailsService", () => {
     });
 
     it("should return the drinks value when it is a string", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
+        json: mockFetchJson.mockResolvedValue({ drinks: "None Found" }),
       } as unknown as Response);
 
       const result = await cocktailsService.getAll("z");
@@ -52,9 +54,10 @@ describe("cocktailsService", () => {
     });
 
     it("should call fetch exactly once", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
+        json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
       } as unknown as Response);
 
       await cocktailsService.getAll("a");
@@ -65,9 +68,10 @@ describe("cocktailsService", () => {
 
   describe("getById", () => {
     it("should return the first cocktail on success", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+        json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
       const result = await cocktailsService.getById("17222");
@@ -77,9 +81,10 @@ describe("cocktailsService", () => {
     });
 
     it("should return null when drinks is null", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: null }),
+        json: mockFetchJson.mockResolvedValue({ drinks: null }),
       } as unknown as Response);
 
       const result = await cocktailsService.getById("99999");
@@ -88,9 +93,10 @@ describe("cocktailsService", () => {
     });
 
     it("should return the string when drinks is a string", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
+        json: mockFetchJson.mockResolvedValue({ drinks: "None Found" }),
       } as unknown as Response);
 
       const result = await cocktailsService.getById("99999");
@@ -117,9 +123,10 @@ describe("cocktailsService", () => {
     });
 
     it("should call fetch with the correct id in the url", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+        json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
       await cocktailsService.getById("42");
@@ -128,9 +135,10 @@ describe("cocktailsService", () => {
     });
 
     it("should call fetch exactly once", async () => {
+      const mockFetchJson = jest.fn();
       mockedFetch.mockResolvedValueOnce({
         ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+        json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
       await cocktailsService.getById("17222");

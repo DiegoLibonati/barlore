@@ -5,11 +5,11 @@ import CocktailDetailPage from "@/pages/CocktailDetailPage/CocktailDetailPage";
 
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
-
 type RenderPage = {
   container: HTMLElement;
 };
+
+const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
 
 const renderPage = (id = mockCocktails[0]!.idDrink): RenderPage => {
   const { container } = render(
@@ -30,9 +30,10 @@ describe("CocktailDetailPage", () => {
   });
 
   it("should render the cocktail name after loading", async () => {
+    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+      json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
     } as unknown as Response);
 
     renderPage();
@@ -41,9 +42,10 @@ describe("CocktailDetailPage", () => {
   });
 
   it("should render the cocktail image with the drink name as alt text", async () => {
+    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+      json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
     } as unknown as Response);
 
     renderPage();
@@ -54,9 +56,10 @@ describe("CocktailDetailPage", () => {
   });
 
   it("should render the Go Home link", async () => {
+    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+      json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
     } as unknown as Response);
 
     renderPage();
@@ -65,9 +68,10 @@ describe("CocktailDetailPage", () => {
   });
 
   it("should call fetch with the correct cocktail id", async () => {
+    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
+      json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
     } as unknown as Response);
 
     renderPage("17222");
@@ -78,9 +82,10 @@ describe("CocktailDetailPage", () => {
   });
 
   it("should navigate to the error page when the cocktail is not found", async () => {
+    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: null }),
+      json: mockFetchJson.mockResolvedValue({ drinks: null }),
     } as unknown as Response);
 
     renderPage();
@@ -89,9 +94,10 @@ describe("CocktailDetailPage", () => {
   });
 
   it("should navigate to the error page when the service returns a string", async () => {
+    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
+      json: mockFetchJson.mockResolvedValue({ drinks: "None Found" }),
     } as unknown as Response);
 
     renderPage();

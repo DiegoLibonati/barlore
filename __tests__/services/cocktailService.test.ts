@@ -4,7 +4,7 @@ import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
 
-describe("cocktailsService", () => {
+describe("cocktailService", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

@@ -1,6 +1,6 @@
 import type { Cocktail } from "@/types/app";
 
-export const cocktailsService = {
+const cocktailService = {
   getAll: async (search: string): Promise<Cocktail[] | string> => {
     const response = await fetch(`/api/json/v1/1/search.php?f=${search}`, {
       method: "GET",
@@ -29,3 +29,5 @@ export const cocktailsService = {
     return (cocktail as Cocktail[])[0]!;
   },
 };
+
+export default cocktailService;

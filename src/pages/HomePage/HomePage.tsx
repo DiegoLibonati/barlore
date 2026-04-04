@@ -5,7 +5,7 @@ import { Cocktail } from "@/types/app";
 import CocktailItem from "@/components/CocktailItem/CocktailItem";
 import Loading from "@/components/Loading/Loading";
 
-import { cocktailsService } from "@/services/cocktailsService";
+import cocktailService from "@/services/cocktailService";
 
 import "@/pages/HomePage/HomePage.css";
 
@@ -29,7 +29,7 @@ const HomePage = () => {
 
   const handleGetCocktails = async (search: string) => {
     setLoading(true);
-    const response = await cocktailsService.getAll(search);
+    const response = await cocktailService.getAll(search);
 
     setCocktails(typeof response === "string" ? [] : response);
     setLoading(false);

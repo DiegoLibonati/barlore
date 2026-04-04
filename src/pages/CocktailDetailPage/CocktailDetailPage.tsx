@@ -6,7 +6,7 @@ import { Cocktail } from "@/types/app";
 import Loading from "@/components/Loading/Loading";
 import IngredientItem from "@/components/IngredientItem/IngredientItem";
 
-import { cocktailsService } from "@/services/cocktailsService";
+import cocktailService from "@/services/cocktailService";
 
 import "@/pages/CocktailDetailPage/CocktailDetailPage.css";
 
@@ -34,7 +34,7 @@ const CocktailDetailPage = () => {
 
     if (!id) return navigate("/error");
 
-    const response = await cocktailsService.getById(id);
+    const response = await cocktailService.getById(id);
 
     if (!response || typeof response === "string") return navigate("/error");
 

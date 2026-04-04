@@ -1,4 +1,4 @@
-import { cocktailsService } from "@/services/cocktailsService";
+import cocktailService from "@/services/cocktailService";
 
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
@@ -17,7 +17,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
       } as unknown as Response);
 
-      const result = await cocktailsService.getAll("a");
+      const result = await cocktailService.getAll("a");
 
       expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/search.php?f=a", { method: "GET" });
       expect(result).toEqual(mockCocktails);
@@ -30,7 +30,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: "None Found" }),
       } as unknown as Response);
 
-      const result = await cocktailsService.getAll("z");
+      const result = await cocktailService.getAll("z");
 
       expect(result).toBe("None Found");
     });
@@ -41,7 +41,7 @@ describe("cocktailsService", () => {
         status: 404,
       } as Response);
 
-      await expect(cocktailsService.getAll("a")).rejects.toThrow("HTTP error! status: 404");
+      await expect(cocktailService.getAll("a")).rejects.toThrow("HTTP error! status: 404");
     });
 
     it("should throw on HTTP error 500", async () => {
@@ -50,7 +50,7 @@ describe("cocktailsService", () => {
         status: 500,
       } as Response);
 
-      await expect(cocktailsService.getAll("a")).rejects.toThrow("HTTP error! status: 500");
+      await expect(cocktailService.getAll("a")).rejects.toThrow("HTTP error! status: 500");
     });
 
     it("should call fetch exactly once", async () => {
@@ -60,7 +60,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
       } as unknown as Response);
 
-      await cocktailsService.getAll("a");
+      await cocktailService.getAll("a");
 
       expect(fetch).toHaveBeenCalledTimes(1);
     });
@@ -74,7 +74,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
-      const result = await cocktailsService.getById("17222");
+      const result = await cocktailService.getById("17222");
 
       expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=17222", { method: "GET" });
       expect(result).toEqual(mockCocktails[0]);
@@ -87,7 +87,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: null }),
       } as unknown as Response);
 
-      const result = await cocktailsService.getById("99999");
+      const result = await cocktailService.getById("99999");
 
       expect(result).toBeNull();
     });
@@ -99,7 +99,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: "None Found" }),
       } as unknown as Response);
 
-      const result = await cocktailsService.getById("99999");
+      const result = await cocktailService.getById("99999");
 
       expect(result).toBe("None Found");
     });
@@ -110,7 +110,7 @@ describe("cocktailsService", () => {
         status: 404,
       } as Response);
 
-      await expect(cocktailsService.getById("17222")).rejects.toThrow("HTTP error! status: 404");
+      await expect(cocktailService.getById("17222")).rejects.toThrow("HTTP error! status: 404");
     });
 
     it("should throw on HTTP error 500", async () => {
@@ -119,7 +119,7 @@ describe("cocktailsService", () => {
         status: 500,
       } as Response);
 
-      await expect(cocktailsService.getById("17222")).rejects.toThrow("HTTP error! status: 500");
+      await expect(cocktailService.getById("17222")).rejects.toThrow("HTTP error! status: 500");
     });
 
     it("should call fetch with the correct id in the url", async () => {
@@ -129,7 +129,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
-      await cocktailsService.getById("42");
+      await cocktailService.getById("42");
 
       expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=42", { method: "GET" });
     });
@@ -141,7 +141,7 @@ describe("cocktailsService", () => {
         json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
-      await cocktailsService.getById("17222");
+      await cocktailService.getById("17222");
 
       expect(fetch).toHaveBeenCalledTimes(1);
     });

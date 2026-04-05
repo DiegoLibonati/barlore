@@ -1,10 +1,12 @@
 import { HashRouter } from "react-router-dom";
 
+import type { JSX } from "react";
+
 import Navbar from "@/components/Navbar/Navbar";
 
 import { CocktailRouter } from "@/router/CocktailRouter";
 
-function App() {
+function App(): JSX.Element {
   return (
     <HashRouter>
       <Navbar></Navbar>

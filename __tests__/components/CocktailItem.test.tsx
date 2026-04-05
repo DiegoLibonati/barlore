@@ -7,10 +7,10 @@ import CocktailItem from "@/components/CocktailItem/CocktailItem";
 
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
-type RenderComponent = {
+interface RenderComponent {
   container: HTMLElement;
   props: CockTailItemProps;
-};
+}
 
 const renderComponent = (overrides?: Partial<CockTailItemProps>): RenderComponent => {
   const [first] = mockCocktails;

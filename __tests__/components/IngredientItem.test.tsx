@@ -4,10 +4,10 @@ import type { IngredientItemProps } from "@/types/props";
 
 import IngredientItem from "@/components/IngredientItem/IngredientItem";
 
-type RenderComponent = {
+interface RenderComponent {
   container: HTMLElement;
   props: IngredientItemProps;
-};
+}
 
 const renderComponent = (overrides?: Partial<IngredientItemProps>): RenderComponent => {
   const props: IngredientItemProps = {

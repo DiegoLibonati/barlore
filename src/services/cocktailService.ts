@@ -26,7 +26,7 @@ const cocktailService = {
 
     if (!cocktail || typeof cocktail === "string") return cocktail;
 
-    return (cocktail as Cocktail[])[0]!;
+    return cocktail[0]!;
   },
 };
 

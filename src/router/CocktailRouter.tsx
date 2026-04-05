@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 
+import type { JSX } from "react";
+
 import HomePage from "@/pages/HomePage/HomePage";
 import AboutPage from "@/pages/AboutPage/AboutPage";
 import CocktailDetailPage from "@/pages/CocktailDetailPage/CocktailDetailPage";
@@ -7,7 +9,7 @@ import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 
 import { PublicRoute } from "@/router/PublicRoute";
 
-export const CocktailRouter = () => {
+export const CocktailRouter = (): JSX.Element => {
   return (
     <Routes>
       <Route element={<PublicRoute />}>

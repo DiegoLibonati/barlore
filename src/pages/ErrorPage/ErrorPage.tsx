@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 
+import type { JSX } from "react";
+
 import "@/pages/ErrorPage/ErrorPage.css";
 
-const ErrorPage = () => {
+const ErrorPage = (): JSX.Element => {
   return (
     <main className="main-error-page">
       <section className="error">

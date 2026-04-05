@@ -1,4 +1,4 @@
-import { Cocktail } from "@/types/app";
+import type { Cocktail } from "@/types/app";
 
 export const mockCocktails: Cocktail[] = [
   {

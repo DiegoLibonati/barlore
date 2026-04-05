@@ -5,9 +5,9 @@ import CocktailDetailPage from "@/pages/CocktailDetailPage/CocktailDetailPage";
 
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
-type RenderPage = {
+interface RenderPage {
   container: HTMLElement;
-};
+}
 
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
 

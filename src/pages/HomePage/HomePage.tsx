@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { Cocktail } from "@/types/app";
+import type { JSX } from "react";
+import type { Cocktail } from "@/types/app";
 
 import CocktailItem from "@/components/CocktailItem/CocktailItem";
 import Loading from "@/components/Loading/Loading";
@@ -9,25 +10,25 @@ import cocktailService from "@/services/cocktailService";
 
 import "@/pages/HomePage/HomePage.css";
 
-const HomePage = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+const HomePage = (): JSX.Element => {
+  const [loading, setLoading] = useState(false);
   const [cocktails, setCocktails] = useState<Cocktail[]>([]);
-  const [searchInputValue, setSearchInputValue] = useState<string>("");
+  const [searchInputValue, setSearchInputValue] = useState("");
 
-  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = async (e) => {
+  const handleSubmit: React.SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    const value = searchInputValue.trim() ?? "a";
+    const value = searchInputValue.trim() || "a";
 
-    handleGetCocktails(value);
+    void handleGetCocktails(value);
   };
 
-  const handleChangeInputSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInputSearch = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
     setSearchInputValue(value);
   };
 
-  const handleGetCocktails = async (search: string) => {
+  const handleGetCocktails = async (search: string): Promise<void> => {
     setLoading(true);
     const response = await cocktailService.getAll(search);
 
@@ -36,13 +37,18 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    handleGetCocktails("a");
+    void handleGetCocktails("a");
   }, []);
 
   return (
     <main className="main-home-page">
       <section className="search" aria-label="Cocktail search">
-        <form className="search__form" onSubmit={(e) => handleSubmit(e)}>
+        <form
+          className="search__form"
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+        >
           <label htmlFor="input-search" className="search__form-label">
             Search your favorite cocktail:{" "}
           </label>
@@ -59,13 +65,13 @@ const HomePage = () => {
 
       {loading ? (
         <Loading></Loading>
-      ) : cocktails?.length === 0 ? (
+      ) : cocktails.length === 0 ? (
         <h2 className="cocktails-not-found">
           There is not exists a cocktail with the name of {searchInputValue}
         </h2>
       ) : (
         <section className="cocktails" aria-label="Cocktail results">
-          {cocktails?.map((item) => {
+          {cocktails.map((item) => {
             return (
               <CocktailItem
                 key={item.idDrink}

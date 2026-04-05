@@ -2,12 +2,14 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 
+import type { JSX } from "react";
+
 import "@/components/Navbar/Navbar.css";
 
-const Navbar = () => {
-  const [open, setOpen] = useState<boolean>(false);
+const Navbar = (): JSX.Element => {
+  const [open, setOpen] = useState(false);
 
-  const handleManageNavbar = () => {
+  const handleManageNavbar = (): void => {
     setOpen((state) => {
       return !state;
     });

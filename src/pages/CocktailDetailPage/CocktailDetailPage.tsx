@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 
-import { Cocktail } from "@/types/app";
+import type { JSX } from "react";
+import type { Cocktail } from "@/types/app";
 
 import Loading from "@/components/Loading/Loading";
 import IngredientItem from "@/components/IngredientItem/IngredientItem";
@@ -10,8 +11,8 @@ import cocktailService from "@/services/cocktailService";
 
 import "@/pages/CocktailDetailPage/CocktailDetailPage.css";
 
-const CocktailDetailPage = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+const CocktailDetailPage = (): JSX.Element => {
+  const [loading, setLoading] = useState(false);
   const [cocktail, setCocktail] = useState<Cocktail | null>(null);
 
   const { id } = useParams();
@@ -21,15 +22,15 @@ const CocktailDetailPage = () => {
     if (!cocktail) return [];
 
     return [
-      cocktail?.strIngredient1,
-      cocktail?.strIngredient2,
-      cocktail?.strIngredient3,
-      cocktail?.strIngredient4,
-      cocktail?.strIngredient5,
+      cocktail.strIngredient1,
+      cocktail.strIngredient2,
+      cocktail.strIngredient3,
+      cocktail.strIngredient4,
+      cocktail.strIngredient5,
     ];
   }, [cocktail]);
 
-  const handleGetCocktail = async () => {
+  const handleGetCocktail = async (): Promise<void> => {
     setLoading(true);
 
     if (!id) return navigate("/error");
@@ -43,7 +44,7 @@ const CocktailDetailPage = () => {
   };
 
   useEffect(() => {
-    handleGetCocktail();
+    void handleGetCocktail();
   }, []);
 
   if (loading)

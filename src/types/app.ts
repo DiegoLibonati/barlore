@@ -1,4 +1,4 @@
-export type Cocktail = {
+export interface Cocktail {
   idDrink: string;
   strDrink: string;
   strDrinkAlternate?: string;
@@ -50,4 +50,4 @@ export type Cocktail = {
   strImageAttribution?: string;
   strCreativeCommonsConfirmed: string;
   dateModified: string;
-};
+}

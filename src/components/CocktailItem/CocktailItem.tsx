@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-import { CockTailItemProps } from "@/types/props";
+import type { JSX } from "react";
+import type { CockTailItemProps } from "@/types/props";
 
 import "@/components/CocktailItem/CocktailItem.css";
 
@@ -10,7 +11,7 @@ const CocktailItem = ({
   strDrink,
   strDrinkThumb,
   strGlass,
-}: CockTailItemProps) => {
+}: CockTailItemProps): JSX.Element => {
   return (
     <article className="cocktail">
       <img src={strDrinkThumb} alt={strDrink} className="cocktail__img"></img>

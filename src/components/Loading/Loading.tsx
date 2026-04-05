@@ -1,6 +1,8 @@
+import type { JSX } from "react";
+
 import "@/components/Loading/Loading.css";
 
-const Loading = () => {
+const Loading = (): JSX.Element => {
   return (
     <section className="cocktail-loader" role="status" aria-label="Loading content">
       <div className="cocktail-loader__root" aria-hidden="true">

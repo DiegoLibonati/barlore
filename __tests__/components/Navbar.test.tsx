@@ -4,9 +4,9 @@ import { MemoryRouter } from "react-router-dom";
 
 import Navbar from "@/components/Navbar/Navbar";
 
-type RenderComponent = {
+interface RenderComponent {
   container: HTMLElement;
-};
+}
 
 const renderComponent = (): RenderComponent => {
   const { container } = render(

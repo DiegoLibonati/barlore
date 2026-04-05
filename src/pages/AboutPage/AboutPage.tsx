@@ -1,6 +1,8 @@
+import type { JSX } from "react";
+
 import "@/pages/AboutPage/AboutPage.css";
 
-const AboutPage = () => {
+const AboutPage = (): JSX.Element => {
   return (
     <main className="main-about-page">
       <section className="about">

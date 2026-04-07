@@ -28,10 +28,9 @@ describe("HomePage", () => {
   });
 
   it("should render the search section", async () => {
-    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
+      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
     } as unknown as Response);
 
     renderPage();
@@ -42,10 +41,9 @@ describe("HomePage", () => {
   });
 
   it("should render the search input", async () => {
-    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
+      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
     } as unknown as Response);
 
     renderPage();
@@ -56,10 +54,9 @@ describe("HomePage", () => {
   });
 
   it("should fetch cocktails with 'a' on mount", async () => {
-    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
+      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
     } as unknown as Response);
 
     renderPage();
@@ -70,10 +67,9 @@ describe("HomePage", () => {
   });
 
   it("should display all fetched cocktails", async () => {
-    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
+      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
     } as unknown as Response);
 
     renderPage();
@@ -84,10 +80,9 @@ describe("HomePage", () => {
   });
 
   it("should display the not-found message when the API returns no results", async () => {
-    const mockFetchJson = jest.fn();
     mockedFetch.mockResolvedValueOnce({
       ok: true,
-      json: mockFetchJson.mockResolvedValue({ drinks: "None Found" }),
+      json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
     } as unknown as Response);
 
     renderPage();
@@ -96,17 +91,16 @@ describe("HomePage", () => {
   });
 
   it("should fetch cocktails with the typed search term on form submit", async () => {
-    const mockFetchJson = jest.fn();
     const user = userEvent.setup();
 
     mockedFetch
       .mockResolvedValueOnce({
         ok: true,
-        json: mockFetchJson.mockResolvedValue({ drinks: mockCocktails }),
+        json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
       } as unknown as Response)
       .mockResolvedValueOnce({
         ok: true,
-        json: mockFetchJson.mockResolvedValue({ drinks: [mockCocktails[0]] }),
+        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
       } as unknown as Response);
 
     renderPage();

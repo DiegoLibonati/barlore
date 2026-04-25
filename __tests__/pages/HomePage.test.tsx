@@ -1,118 +1,152 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
+
+import type { RenderResult } from "@testing-library/react";
 
 import HomePage from "@/pages/HomePage/HomePage";
 
+import cocktailService from "@/services/cocktailService";
+
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
-interface RenderPage {
-  container: HTMLElement;
-}
+const mockGetAll = cocktailService.getAll as jest.Mock;
 
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
+jest.mock("@/services/cocktailService", () => ({
+  __esModule: true,
+  default: {
+    getAll: jest.fn(),
+  },
+}));
 
-const renderPage = (): RenderPage => {
-  const { container } = render(
+const renderPage = (): RenderResult =>
+  render(
     <MemoryRouter>
       <HomePage />
     </MemoryRouter>
   );
 
-  return { container };
-};
-
 describe("HomePage", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  describe("rendering", () => {
+    it("should render the search input", () => {
+      mockGetAll.mockImplementation(
+        () =>
+          new Promise(() => {
+            // Empty fn
+          })
+      );
+      renderPage();
+      expect(screen.getByPlaceholderText("Cocktail name")).toBeInTheDocument();
+    });
+
+    it("should render the search form label", () => {
+      mockGetAll.mockImplementation(
+        () =>
+          new Promise(() => {
+            // Empty fn
+          })
+      );
+      renderPage();
+      expect(screen.getByLabelText(/Search your favorite cocktail/i)).toBeInTheDocument();
+    });
+
+    it("should render cocktails after a successful fetch", async () => {
+      mockGetAll.mockResolvedValue(mockCocktails);
+      renderPage();
+      expect(await screen.findByText("A1")).toBeInTheDocument();
+      expect(screen.getByText("ABC")).toBeInTheDocument();
+      expect(screen.getByText("Almeria")).toBeInTheDocument();
+    });
+
+    it("should show the loading indicator while fetching", async () => {
+      mockGetAll.mockImplementation(
+        () =>
+          new Promise(() => {
+            // Empty fn
+          })
+      );
+      renderPage();
+      expect(await screen.findByRole("status", { name: "Loading content" })).toBeInTheDocument();
+    });
+
+    it("should call getAll with 'a' on initial mount", async () => {
+      mockGetAll.mockResolvedValue(mockCocktails);
+      renderPage();
+      await screen.findByText("A1");
+      expect(mockGetAll).toHaveBeenCalledWith("a");
+    });
   });
 
-  it("should render the search section", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-    } as unknown as Response);
+  describe("empty state", () => {
+    it("should show a not found message when service returns an empty array", async () => {
+      const user = userEvent.setup();
+      mockGetAll.mockResolvedValue(mockCocktails);
+      renderPage();
+      await screen.findByText("A1");
 
-    renderPage();
+      const input = screen.getByPlaceholderText("Cocktail name");
+      mockGetAll.mockResolvedValue([]);
+      await user.clear(input);
+      await user.type(input, "zzz");
+      await user.keyboard("{Enter}");
 
-    await screen.findByText(mockCocktails[0]!.strDrink);
+      expect(
+        await screen.findByText(/There is not exists a cocktail with the name of zzz/i)
+      ).toBeInTheDocument();
+    });
 
-    expect(screen.getByRole("region", { name: "Cocktail search" })).toBeInTheDocument();
+    it("should show a not found message when service returns a string", async () => {
+      mockGetAll.mockResolvedValue("null");
+      renderPage();
+      const loader = await screen.findByRole("status", { name: "Loading content" });
+      await waitFor(() => {
+        expect(loader).not.toBeInTheDocument();
+      });
+      expect(screen.getByText(/There is not exists a cocktail/i)).toBeInTheDocument();
+    });
   });
 
-  it("should render the search input", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-    } as unknown as Response);
+  describe("search behavior", () => {
+    it("should update the input value when the user types", async () => {
+      const user = userEvent.setup();
+      mockGetAll.mockResolvedValue(mockCocktails);
+      renderPage();
+      const input = screen.getByPlaceholderText("Cocktail name");
+      await user.type(input, "margarita");
+      expect(input).toHaveValue("margarita");
+    });
 
-    renderPage();
+    it("should call getAll with the typed value when the form is submitted", async () => {
+      const user = userEvent.setup();
+      mockGetAll.mockResolvedValue(mockCocktails);
+      renderPage();
+      await screen.findByText("A1");
 
-    await screen.findByText(mockCocktails[0]!.strDrink);
+      const input = screen.getByPlaceholderText("Cocktail name");
+      await user.clear(input);
+      await user.type(input, "b");
+      await user.keyboard("{Enter}");
 
-    expect(screen.getByPlaceholderText("Cocktail name")).toBeInTheDocument();
-  });
+      await waitFor(() => {
+        expect(mockGetAll).toHaveBeenCalledWith("b");
+      });
+    });
 
-  it("should fetch cocktails with 'a' on mount", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-    } as unknown as Response);
+    it("should call getAll with 'a' when the form is submitted with empty input", async () => {
+      const user = userEvent.setup();
+      mockGetAll.mockResolvedValue(mockCocktails);
+      renderPage();
+      await screen.findByText("A1");
 
-    renderPage();
+      mockGetAll.mockClear();
+      const input = screen.getByPlaceholderText("Cocktail name");
+      await user.click(input);
+      await user.keyboard("{Enter}");
 
-    await screen.findByText(mockCocktails[0]!.strDrink);
-
-    expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/search.php?f=a", { method: "GET" });
-  });
-
-  it("should display all fetched cocktails", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-    } as unknown as Response);
-
-    renderPage();
-
-    expect(await screen.findByText(mockCocktails[0]!.strDrink)).toBeInTheDocument();
-    expect(await screen.findByText(mockCocktails[1]!.strDrink)).toBeInTheDocument();
-    expect(await screen.findByText(mockCocktails[2]!.strDrink)).toBeInTheDocument();
-  });
-
-  it("should display the not-found message when the API returns no results", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
-    } as unknown as Response);
-
-    renderPage();
-
-    expect(await screen.findByText(/There is not exists a cocktail/i)).toBeInTheDocument();
-  });
-
-  it("should fetch cocktails with the typed search term on form submit", async () => {
-    const user = userEvent.setup();
-
-    mockedFetch
-      .mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-      } as unknown as Response)
-      .mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-      } as unknown as Response);
-
-    renderPage();
-
-    await screen.findByText(mockCocktails[0]!.strDrink);
-
-    await user.clear(screen.getByPlaceholderText("Cocktail name"));
-    await user.type(screen.getByPlaceholderText("Cocktail name"), "b");
-    await user.keyboard("{Enter}");
-
-    await screen.findByText(mockCocktails[0]!.strDrink);
-
-    expect(fetch).toHaveBeenLastCalledWith("/api/json/v1/1/search.php?f=b", { method: "GET" });
+      await waitFor(() => {
+        expect(mockGetAll).toHaveBeenCalledTimes(1);
+        expect(mockGetAll).toHaveBeenCalledWith("a");
+      });
+    });
   });
 });

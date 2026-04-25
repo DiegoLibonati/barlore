@@ -1,18 +1,27 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+
+import type { RenderResult } from "@testing-library/react";
 
 import CocktailDetailPage from "@/pages/CocktailDetailPage/CocktailDetailPage";
 
+import cocktailService from "@/services/cocktailService";
+
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
-interface RenderPage {
-  container: HTMLElement;
-}
+const mockGetById = cocktailService.getById as jest.Mock;
 
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
+const mockCocktail = mockCocktails[0]!;
 
-const renderPage = (id = mockCocktails[0]!.idDrink): RenderPage => {
-  const { container } = render(
+jest.mock("@/services/cocktailService", () => ({
+  __esModule: true,
+  default: {
+    getById: jest.fn(),
+  },
+}));
+
+const renderPage = (id = "17222"): RenderResult =>
+  render(
     <MemoryRouter initialEntries={[`/cocktail/${id}`]}>
       <Routes>
         <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
@@ -21,81 +30,86 @@ const renderPage = (id = mockCocktails[0]!.idDrink): RenderPage => {
     </MemoryRouter>
   );
 
-  return { container };
-};
-
 describe("CocktailDetailPage", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
+  describe("loading state", () => {
+    it("should show the loading indicator while fetching", async () => {
+      mockGetById.mockImplementation(
+        () =>
+          new Promise(() => {
+            // Empty fn
+          })
+      );
+      renderPage();
+      expect(await screen.findByRole("status", { name: "Loading content" })).toBeInTheDocument();
+    });
   });
 
-  it("should render the cocktail name after loading", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-    } as unknown as Response);
+  describe("rendering", () => {
+    it("should render the cocktail name after loading", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      expect(await screen.findByText(mockCocktail.strDrink)).toBeInTheDocument();
+    });
 
-    renderPage();
+    it("should render the cocktail image with the correct src", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      const img = await screen.findByRole("img", { name: mockCocktail.strDrink });
+      expect(img).toHaveAttribute("src", mockCocktail.strDrinkThumb);
+    });
 
-    expect(await screen.findByText(mockCocktails[0]!.strDrink)).toBeInTheDocument();
+    it("should render the cocktail glass", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      expect(await screen.findByText(mockCocktail.strGlass)).toBeInTheDocument();
+    });
+
+    it("should render the cocktail alcoholic info", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      expect(await screen.findByText(mockCocktail.strAlcoholic)).toBeInTheDocument();
+    });
+
+    it("should render the ingredients list", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      expect(await screen.findByRole("list", { name: "Ingredients" })).toBeInTheDocument();
+    });
+
+    it("should render each ingredient", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      expect(await screen.findByText("Gin")).toBeInTheDocument();
+      expect(screen.getByText("Grand Marnier")).toBeInTheDocument();
+      expect(screen.getByText("Lemon Juice")).toBeInTheDocument();
+      expect(screen.getByText("Grenadine")).toBeInTheDocument();
+    });
+
+    it("should render the go home link", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage();
+      expect(await screen.findByRole("link", { name: "Go back to home page" })).toBeInTheDocument();
+    });
+
+    it("should call getById with the id from the route param", async () => {
+      mockGetById.mockResolvedValue(mockCocktail);
+      renderPage("17222");
+      await screen.findByText(mockCocktail.strDrink);
+      expect(mockGetById).toHaveBeenCalledWith("17222");
+    });
   });
 
-  it("should render the cocktail image with the drink name as alt text", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-    } as unknown as Response);
+  describe("error handling", () => {
+    it("should navigate to the error page when the service returns null", async () => {
+      mockGetById.mockResolvedValue(null);
+      renderPage();
+      expect(await screen.findByText("Error Page")).toBeInTheDocument();
+    });
 
-    renderPage();
-
-    expect(
-      await screen.findByRole("img", { name: mockCocktails[0]!.strDrink })
-    ).toBeInTheDocument();
-  });
-
-  it("should render the Go Home link", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-    } as unknown as Response);
-
-    renderPage();
-
-    expect(await screen.findByRole("link", { name: "Go back to home page" })).toBeInTheDocument();
-  });
-
-  it("should call fetch with the correct cocktail id", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-    } as unknown as Response);
-
-    renderPage("17222");
-
-    await screen.findByText(mockCocktails[0]!.strDrink);
-
-    expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=17222", { method: "GET" });
-  });
-
-  it("should navigate to the error page when the cocktail is not found", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: null }),
-    } as unknown as Response);
-
-    renderPage();
-
-    expect(await screen.findByText("Error Page")).toBeInTheDocument();
-  });
-
-  it("should navigate to the error page when the service returns a string", async () => {
-    mockedFetch.mockResolvedValueOnce({
-      ok: true,
-      json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
-    } as unknown as Response);
-
-    renderPage();
-
-    expect(await screen.findByText("Error Page")).toBeInTheDocument();
+    it("should navigate to the error page when the service returns a string", async () => {
+      mockGetById.mockResolvedValue("not found");
+      renderPage();
+      expect(await screen.findByText("Error Page")).toBeInTheDocument();
+    });
   });
 });

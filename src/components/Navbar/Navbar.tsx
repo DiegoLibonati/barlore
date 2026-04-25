@@ -18,7 +18,7 @@ const Navbar = (): JSX.Element => {
   return (
     <header className="header-wrapper">
       <div className="header-wrapper__content">
-        <h2 className="header-wrapper__title">TheCocktailDB</h2>
+        <h2 className="header-wrapper__title">Barlore</h2>
         <button
           type="button"
           onClick={handleManageNavbar}

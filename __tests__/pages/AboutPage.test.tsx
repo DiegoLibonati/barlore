@@ -1,31 +1,21 @@
 import { render, screen } from "@testing-library/react";
 
+import type { RenderResult } from "@testing-library/react";
+
 import AboutPage from "@/pages/AboutPage/AboutPage";
 
-interface RenderPage {
-  container: HTMLElement;
-}
-
-const renderPage = (): RenderPage => {
-  const { container } = render(<AboutPage />);
-  return { container };
-};
+const renderPage = (): RenderResult => render(<AboutPage />);
 
 describe("AboutPage", () => {
-  it("should render the main element", () => {
-    const { container } = renderPage();
-    expect(container.querySelector<HTMLElement>("main.main-about-page")).toBeInTheDocument();
-  });
+  describe("rendering", () => {
+    it("should render the about us heading", () => {
+      renderPage();
+      expect(screen.getByRole("heading", { name: "About us" })).toBeInTheDocument();
+    });
 
-  it("should render the About us heading", () => {
-    renderPage();
-    expect(screen.getByRole("heading", { name: "About us" })).toBeInTheDocument();
-  });
-
-  it("should render the description paragraph", () => {
-    const { container } = renderPage();
-    expect(
-      container.querySelector<HTMLParagraphElement>(".about__description")
-    ).toBeInTheDocument();
+    it("should render the description paragraph", () => {
+      renderPage();
+      expect(screen.getByText(/Lorem ipsum/i)).toBeInTheDocument();
+    });
   });
 });

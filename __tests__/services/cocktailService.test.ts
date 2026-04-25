@@ -2,140 +2,136 @@ import cocktailService from "@/services/cocktailService";
 
 import { mockCocktails } from "@tests/__mocks__/cocktails.mock";
 
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>;
+const mockCocktail = mockCocktails[0]!;
+
+const mockFetchSuccess = (data: unknown): void => {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    json: async () => await data,
+  } as Response);
+};
+
+const mockFetchError = (status: number): void => {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: false,
+    status,
+  } as Response);
+};
+
+const mockFetchNetworkError = (message = "Network error"): void => {
+  global.fetch = jest.fn().mockRejectedValue(new Error(message));
+};
 
 describe("cocktailService", () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   describe("getAll", () => {
-    it("should return cocktails on success", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-      } as unknown as Response);
+    describe("when fetch succeeds with cocktails", () => {
+      it("should return an array of cocktails", async () => {
+        mockFetchSuccess({ drinks: mockCocktails });
+        const result = await cocktailService.getAll("a");
+        expect(result).toEqual(mockCocktails);
+      });
 
-      const result = await cocktailService.getAll("a");
+      it("should call fetch with the correct endpoint", async () => {
+        mockFetchSuccess({ drinks: mockCocktails });
+        await cocktailService.getAll("a");
+        expect(global.fetch).toHaveBeenCalledWith("/api/json/v1/1/search.php?f=a", {
+          method: "GET",
+        });
+      });
 
-      expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/search.php?f=a", { method: "GET" });
-      expect(result).toEqual(mockCocktails);
+      it("should include the search parameter in the url", async () => {
+        mockFetchSuccess({ drinks: mockCocktails });
+        await cocktailService.getAll("m");
+        expect(global.fetch).toHaveBeenCalledWith("/api/json/v1/1/search.php?f=m", {
+          method: "GET",
+        });
+      });
     });
 
-    it("should return the drinks value when it is a string", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
-      } as unknown as Response);
-
-      const result = await cocktailService.getAll("z");
-
-      expect(result).toBe("None Found");
+    describe("when fetch succeeds with no results", () => {
+      it("should return the string when drinks is a string", async () => {
+        mockFetchSuccess({ drinks: "null" });
+        const result = await cocktailService.getAll("z");
+        expect(result).toBe("null");
+      });
     });
 
-    it("should throw on HTTP error 404", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 404,
-      } as Response);
+    describe("when the server returns an error", () => {
+      it("should throw an error with the HTTP status", async () => {
+        mockFetchError(500);
+        await expect(cocktailService.getAll("a")).rejects.toThrow("HTTP error! status: 500");
+      });
 
-      await expect(cocktailService.getAll("a")).rejects.toThrow("HTTP error! status: 404");
+      it("should throw an error with 404 status", async () => {
+        mockFetchError(404);
+        await expect(cocktailService.getAll("a")).rejects.toThrow("HTTP error! status: 404");
+      });
     });
 
-    it("should throw on HTTP error 500", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 500,
-      } as Response);
-
-      await expect(cocktailService.getAll("a")).rejects.toThrow("HTTP error! status: 500");
-    });
-
-    it("should call fetch exactly once", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: mockCocktails }),
-      } as unknown as Response);
-
-      await cocktailService.getAll("a");
-
-      expect(fetch).toHaveBeenCalledTimes(1);
+    describe("when there is a network error", () => {
+      it("should propagate the network error", async () => {
+        mockFetchNetworkError("Failed to fetch");
+        await expect(cocktailService.getAll("a")).rejects.toThrow("Failed to fetch");
+      });
     });
   });
 
   describe("getById", () => {
-    it("should return the first cocktail on success", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-      } as unknown as Response);
+    describe("when fetch succeeds with a cocktail", () => {
+      it("should return the first cocktail from the drinks array", async () => {
+        mockFetchSuccess({ drinks: [mockCocktail] });
+        const result = await cocktailService.getById("17222");
+        expect(result).toEqual(mockCocktail);
+      });
 
-      const result = await cocktailService.getById("17222");
+      it("should call fetch with the correct endpoint", async () => {
+        mockFetchSuccess({ drinks: [mockCocktail] });
+        await cocktailService.getById("17222");
+        expect(global.fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=17222", {
+          method: "GET",
+        });
+      });
 
-      expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=17222", { method: "GET" });
-      expect(result).toEqual(mockCocktails[0]);
+      it("should include the id in the url", async () => {
+        mockFetchSuccess({ drinks: [mockCocktail] });
+        await cocktailService.getById("99999");
+        expect(global.fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=99999", {
+          method: "GET",
+        });
+      });
     });
 
-    it("should return null when drinks is null", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: null }),
-      } as unknown as Response);
+    describe("when the cocktail is not found", () => {
+      it("should return null when drinks is null", async () => {
+        mockFetchSuccess({ drinks: null });
+        const result = await cocktailService.getById("99999");
+        expect(result).toBeNull();
+      });
 
-      const result = await cocktailService.getById("99999");
-
-      expect(result).toBeNull();
+      it("should return the string when drinks is a string", async () => {
+        mockFetchSuccess({ drinks: "not found" });
+        const result = await cocktailService.getById("99999");
+        expect(result).toBe("not found");
+      });
     });
 
-    it("should return the string when drinks is a string", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: "None Found" }),
-      } as unknown as Response);
+    describe("when the server returns an error", () => {
+      it("should throw an error with the HTTP status", async () => {
+        mockFetchError(404);
+        await expect(cocktailService.getById("99999")).rejects.toThrow("HTTP error! status: 404");
+      });
 
-      const result = await cocktailService.getById("99999");
-
-      expect(result).toBe("None Found");
+      it("should throw an error with 500 status", async () => {
+        mockFetchError(500);
+        await expect(cocktailService.getById("17222")).rejects.toThrow("HTTP error! status: 500");
+      });
     });
 
-    it("should throw on HTTP error 404", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 404,
-      } as Response);
-
-      await expect(cocktailService.getById("17222")).rejects.toThrow("HTTP error! status: 404");
-    });
-
-    it("should throw on HTTP error 500", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: false,
-        status: 500,
-      } as Response);
-
-      await expect(cocktailService.getById("17222")).rejects.toThrow("HTTP error! status: 500");
-    });
-
-    it("should call fetch with the correct id in the url", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-      } as unknown as Response);
-
-      await cocktailService.getById("42");
-
-      expect(fetch).toHaveBeenCalledWith("/api/json/v1/1/lookup.php?i=42", { method: "GET" });
-    });
-
-    it("should call fetch exactly once", async () => {
-      mockedFetch.mockResolvedValueOnce({
-        ok: true,
-        json: jest.fn().mockResolvedValue({ drinks: [mockCocktails[0]] }),
-      } as unknown as Response);
-
-      await cocktailService.getById("17222");
-
-      expect(fetch).toHaveBeenCalledTimes(1);
+    describe("when there is a network error", () => {
+      it("should propagate the network error", async () => {
+        mockFetchNetworkError();
+        await expect(cocktailService.getById("17222")).rejects.toThrow("Network error");
+      });
     });
   });
 });

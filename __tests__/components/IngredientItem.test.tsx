@@ -1,38 +1,39 @@
 import { render, screen } from "@testing-library/react";
 
+import type { RenderResult } from "@testing-library/react";
 import type { IngredientItemProps } from "@/types/props";
 
 import IngredientItem from "@/components/IngredientItem/IngredientItem";
 
-interface RenderComponent {
-  container: HTMLElement;
-  props: IngredientItemProps;
-}
-
-const renderComponent = (overrides?: Partial<IngredientItemProps>): RenderComponent => {
-  const props: IngredientItemProps = {
-    ingredient: "Gin",
-    ...overrides,
-  };
-
-  const { container } = render(<IngredientItem {...props} />);
-
-  return { container, props };
+const renderComponent = (props: Partial<IngredientItemProps> = {}): RenderResult => {
+  const defaultProps: IngredientItemProps = { ingredient: "Gin", ...props };
+  return render(
+    <ul>
+      <IngredientItem {...defaultProps} />
+    </ul>
+  );
 };
 
 describe("IngredientItem", () => {
-  it("should render a list item element", () => {
-    renderComponent();
-    expect(screen.getByRole("listitem")).toBeInTheDocument();
-  });
+  describe("rendering", () => {
+    it("should render the ingredient text", () => {
+      renderComponent({ ingredient: "Gin" });
+      expect(screen.getByText("Gin")).toBeInTheDocument();
+    });
 
-  it("should display the ingredient text", () => {
-    renderComponent({ ingredient: "Vodka" });
-    expect(screen.getByRole("listitem")).toHaveTextContent("Vodka");
-  });
+    it("should render as a list item", () => {
+      renderComponent();
+      expect(screen.getByRole("listitem")).toBeInTheDocument();
+    });
 
-  it("should apply the ingredient-item class", () => {
-    renderComponent();
-    expect(screen.getByRole("listitem")).toHaveClass("ingredient-item");
+    it("should apply the ingredient-item class", () => {
+      renderComponent();
+      expect(screen.getByRole("listitem")).toHaveClass("ingredient-item");
+    });
+
+    it("should render a different ingredient when provided", () => {
+      renderComponent({ ingredient: "Lemon Juice" });
+      expect(screen.getByText("Lemon Juice")).toBeInTheDocument();
+    });
   });
 });

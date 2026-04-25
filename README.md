@@ -1,4 +1,4 @@
-# TheCocktailDB
+# Barlore
 
 ## Educational Purpose
 
@@ -17,7 +17,13 @@ The application will open automatically at `http://localhost:3000`
 
 ## Description
 
-I made a web application that allows you to see different types of drinks. If we don't use the search engine on the main page, all the available drinks will appear. If we click on any drink, it will take us to the special page of that drink where we can see different information such as the name, the name of the drink, more information and its ingredients, plus a button to return to home. Also this page has an About section and an Error 404 section in case the URL was not found.
+**Barlore** is a cocktail discovery web application powered by [TheCocktailDB](https://www.thecocktaildb.com/) public API. It lets users browse and explore a large catalog of cocktails, search by name, and dive into the full details of any drink they find interesting.
+
+On the home page, the app loads a default set of cocktails on arrival so there is always something to explore without any extra action from the user. A search bar at the top lets users filter the catalog by typing a cocktail name — results update immediately after submitting the form. If no cocktail matches the search term, a friendly message is shown instead of an empty screen.
+
+Clicking on any cocktail card opens its dedicated detail page, which displays the full profile of that drink: its name, the type of glass it is traditionally served in, whether it is alcoholic or non-alcoholic, a high-quality photo, and a list of its ingredients. A back button is always present to return to the home page without losing context.
+
+The application also includes an About page that describes the project, and a dedicated 404 error page that catches any unknown or malformed URL and redirects the user gracefully back to the home page.
 
 ## Technologies used
 
@@ -69,11 +75,7 @@ I made a web application that allows you to see different types of drinks. If we
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/TheCocktailDB`](https://www.diegolibonati.com.ar/#/project/TheCocktailDB)
-
-## Video
-
-https://user-images.githubusercontent.com/99032604/199622106-9471c1c4-8dad-4792-933a-fd6e3d87632e.mp4
+[`https://www.diegolibonati.com.ar/#/project/barlore`](https://www.diegolibonati.com.ar/#/project/barlore)
 
 ## Testing
 

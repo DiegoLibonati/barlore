@@ -1,7 +1,7 @@
 {
-  "name": "TheCocktailDB",
-  "short_name": "TheCocktailDB",
-  "description": "I made a web application that allows you to see different types of drinks. If we don't use the search engine on the main page, all the available drinks will appear. If we click on any drink, it will take us to the special page of that drink where we can see different information such as the name, the name of the drink, more information and its ingredients, plus a button to return to home. Also this page has an About section and an Error 404 section in case the URL was not found.",
+  "name": "Barlore",
+  "short_name": "Barlore",
+  "description": "Barlore is a cocktail discovery web application powered by TheCocktailDB public API.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

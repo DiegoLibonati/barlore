@@ -6,15 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm run dev`
-
-The application will open automatically at `http://localhost:3000`
-
 ## Description
 
 **Barlore** is a cocktail discovery web application powered by [TheCocktailDB](https://www.thecocktaildb.com/) public API. It lets users browse and explore a large catalog of cocktails, search by name, and dive into the full details of any drink they find interesting.
@@ -27,6 +18,8 @@ The application also includes an About page that describes the project, and a de
 
 ## Technologies used
 
+To deliver the experience described above, Barlore is built on top of the following stack:
+
 1. React JS
 2. TypeScript
 3. Vite
@@ -34,6 +27,8 @@ The application also includes an About page that describes the project, and a de
 5. CSS3
 
 ## Libraries used
+
+These technologies are complemented by the following runtime and development libraries:
 
 #### Dependencies
 
@@ -74,11 +69,26 @@ The application also includes an About page that describes the project, and a de
 "vite": "^7.1.6"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/barlore`](https://www.diegolibonati.com.ar/#/project/barlore)
+With the stack and dependencies covered, follow these steps to run the project locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Copy `.env.example` to `.env` (the app reads `VITE_API_URL` from it to proxy TheCocktailDB API):
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Execute: `npm install`
+5. Execute: `npm run dev`
+
+The application will open automatically at `http://localhost:3000`.
 
 ## Testing
+
+Once the app is running, you can verify behavior by executing the test suite:
 
 1. Navigate to the project folder
 2. Execute: `npm test`
@@ -89,7 +99,9 @@ For coverage report:
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
+
+Beyond functional tests, the project ships with scripts to audit dependencies and overall code health.
 
 ### npm audit
 
@@ -116,3 +128,7 @@ npm run doctor -- --verbose
 ## Known Issues
 
 None at the moment.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/barlore`](https://www.diegolibonati.com.ar/#/project/barlore)

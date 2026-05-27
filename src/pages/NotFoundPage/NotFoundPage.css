@@ -1,4 +1,4 @@
-.main-error-page {
+.main-not-found-page {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   padding-top: 4.375rem;
 }
 
-.error {
+.not-found {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -18,12 +18,12 @@
   height: 31.25rem;
 }
 
-.error__title {
+.not-found__title {
   font-size: 3.125rem;
   text-align: center;
 }
 
-.error__link-go-home {
+.not-found__link-go-home {
   background-color: var(--color-primary);
   padding: 0.625rem;
   font-size: 1.25rem;
@@ -36,7 +36,7 @@
     color 1s;
 }
 
-.error__link-go-home:hover {
+.not-found__link-go-home:hover {
   background-color: var(--color-white);
   outline: 0.125rem solid var(--color-primary);
   color: var(--color-primary);
@@ -46,7 +46,7 @@
     color 1s;
 }
 
-.error__img {
+.not-found__img {
   height: 15.625rem;
   width: 15.625rem;
   object-fit: cover;

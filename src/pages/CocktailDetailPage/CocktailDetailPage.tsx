@@ -33,11 +33,11 @@ const CocktailDetailPage = (): JSX.Element => {
   const handleGetCocktail = async (): Promise<void> => {
     setLoading(true);
 
-    if (!id) return navigate("/error");
+    if (!id) return navigate("/not-found");
 
     const response = await cocktailService.getById(id);
 
-    if (!response || typeof response === "string") return navigate("/error");
+    if (!response || typeof response === "string") return navigate("/not-found");
 
     setCocktail(response);
     setLoading(false);

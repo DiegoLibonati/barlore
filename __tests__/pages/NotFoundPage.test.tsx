@@ -3,16 +3,16 @@ import { MemoryRouter } from "react-router-dom";
 
 import type { RenderResult } from "@testing-library/react";
 
-import ErrorPage from "@/pages/ErrorPage/ErrorPage";
+import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 
 const renderPage = (): RenderResult =>
   render(
     <MemoryRouter>
-      <ErrorPage />
+      <NotFoundPage />
     </MemoryRouter>
   );
 
-describe("ErrorPage", () => {
+describe("NotFoundPage", () => {
   describe("rendering", () => {
     it("should render the page not found heading", () => {
       renderPage();
@@ -32,7 +32,7 @@ describe("ErrorPage", () => {
       );
     });
 
-    it("should render the error image", () => {
+    it("should render the not found image", () => {
       renderPage();
       expect(screen.getByRole("img", { name: "sad person gif" })).toBeInTheDocument();
     });

@@ -5,7 +5,7 @@ import type { JSX } from "react";
 import HomePage from "@/pages/HomePage/HomePage";
 import AboutPage from "@/pages/AboutPage/AboutPage";
 import CocktailDetailPage from "@/pages/CocktailDetailPage/CocktailDetailPage";
-import ErrorPage from "@/pages/ErrorPage/ErrorPage";
+import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 
 import { PublicRoute } from "@/router/PublicRoute";
 
@@ -16,10 +16,10 @@ export const CocktailRouter = (): JSX.Element => {
         <Route path="/" element={<HomePage></HomePage>}></Route>
         <Route path="/about" element={<AboutPage></AboutPage>}></Route>
         <Route path="/cocktail/:id" element={<CocktailDetailPage></CocktailDetailPage>}></Route>
-        <Route path="/error" element={<ErrorPage></ErrorPage>}></Route>
+        <Route path="/not-found" element={<NotFoundPage></NotFoundPage>}></Route>
       </Route>
 
-      <Route path="/*" element={<Navigate to={"/error"}></Navigate>}></Route>
+      <Route path="/*" element={<Navigate to={"/not-found"}></Navigate>}></Route>
     </Routes>
   );
 };

@@ -25,7 +25,7 @@ const renderPage = (id = "17222"): RenderResult =>
     <MemoryRouter initialEntries={[`/cocktail/${id}`]}>
       <Routes>
         <Route path="/cocktail/:id" element={<CocktailDetailPage />} />
-        <Route path="/error" element={<div>Error Page</div>} />
+        <Route path="/not-found" element={<div>Not Found Page</div>} />
       </Routes>
     </MemoryRouter>
   );
@@ -100,16 +100,16 @@ describe("CocktailDetailPage", () => {
   });
 
   describe("error handling", () => {
-    it("should navigate to the error page when the service returns null", async () => {
+    it("should navigate to the not found page when the service returns null", async () => {
       mockGetById.mockResolvedValue(null);
       renderPage();
-      expect(await screen.findByText("Error Page")).toBeInTheDocument();
+      expect(await screen.findByText("Not Found Page")).toBeInTheDocument();
     });
 
-    it("should navigate to the error page when the service returns a string", async () => {
+    it("should navigate to the not found page when the service returns a string", async () => {
       mockGetById.mockResolvedValue("not found");
       renderPage();
-      expect(await screen.findByText("Error Page")).toBeInTheDocument();
+      expect(await screen.findByText("Not Found Page")).toBeInTheDocument();
     });
   });
 });
